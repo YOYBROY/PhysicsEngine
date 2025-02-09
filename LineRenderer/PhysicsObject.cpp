@@ -2,6 +2,10 @@
 #include "LineRenderer.h"
 #include "Application.h"
 
+PhysicsObject::PhysicsObject()
+{
+}
+
 PhysicsObject::PhysicsObject(Vec2 position, float mass, float elasticity) : _position(position), _mass(mass), _elasticity(elasticity)
 {
 }

@@ -3,7 +3,17 @@
 #include "Vec2.h"
 #include "LineRenderer.h"
 
+enum ObjectType
+{
+	CIRCLE,
+	BOX,
+	PLANE,
+
+	COUNT
+};
+
 class PhysicsObject
+
 {
 protected:
 	float _mass;
@@ -12,8 +22,10 @@ protected:
 	Vec2 _acceleration;
 	float _elasticity;
 	Colour _colour;
+	int _collisionAccumulation;
 
 public:
+	PhysicsObject();
 	PhysicsObject(Vec2 position, float mass, float elasticity);
 	PhysicsObject(Vec2 position, float mass, float elasticity, Vec2 velocity);
 	virtual void Update(float delta);
@@ -36,4 +48,8 @@ public:
 
 	Colour GetColour() { return _colour; }
 	void SetColour(Colour colour) { _colour = colour; }
+
+	virtual ObjectType GetObjectType() = 0;
+	
+	void AddCollisionAccumulation(int acummulation) { _collisionAccumulation += acummulation; }
 };

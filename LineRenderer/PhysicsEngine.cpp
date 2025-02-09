@@ -4,20 +4,27 @@
 #include "CollisionFunctions.h"
 #include "Circle.h"
 #include "Box.h"
+#include "Plane.h"
 
 PhysicsEngine::PhysicsEngine()
 {
+	//appInfo.fixedFramerate = 1;
 	appInfo.appName = "Physics Engine";
 }
 
 void PhysicsEngine::Initialise()
 {
-	//Draw Circle
-	//_physicsObjects.push_back(new Circle(Vec2(0, 0), 1, 1, 1));
-	_physicsObjects.push_back(new Circle(Vec2(1.2f, 3), 1, 1, 1));
+	PopulateCollisionFunctionArray();
+	//Draw Box
+	//_physicsObjects.push_back(new Circle(Vec2(-2, -1), 1, 1, 1));
+	//_physicsObjects.push_back(new Circle(Vec2(-2, -1), 1, 1, 1));
 
 	//Draw Box
-	_physicsObjects.push_back(new Box(Vec2(1.2f, 3), 2, 1.5f, 1, 1));
+	_physicsObjects.push_back(new Box(Vec2(3, 3), 3, 1, 1, 1));
+	//_physicsObjects.push_back(new Box(Vec2(1.2f, 0), 2, 1.5f, 1, 1));
+
+	//Draw Plane
+	_physicsObjects.push_back(new Plane(Vec2(1, 0.4f), 0, 5));
 }
 
 void PhysicsEngine::Update(float delta)
@@ -35,17 +42,13 @@ void PhysicsEngine::Update(float delta)
 	{
 		for (int j = i + 1; j < _physicsObjects.size(); j++)
 		{
-			CollisionInfo collisionInfo = CircleToCircle(_physicsObjects[i], _physicsObjects[j]);
+			CollisionInfo collisionInfo = CheckCollision(_physicsObjects[i], _physicsObjects[j]);
+			if (collisionInfo.objA == nullptr || collisionInfo.objB == nullptr) continue;
 
 			if (collisionInfo._overlapping)
 			{
-				_physicsObjects[i]->SetColour(Colour::RED);
-				_physicsObjects[j]->SetColour(Colour::RED);
-			}
-			else
-			{
-				_physicsObjects[i]->SetColour(Colour::GREEN);
-				_physicsObjects[j]->SetColour(Colour::GREEN);
+				collisionInfo.objA->AddCollisionAccumulation(1);
+				collisionInfo.objB->AddCollisionAccumulation(1);
 			}
 		}
 	}
