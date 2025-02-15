@@ -1,1 +1,30 @@
 #include "CollisionInfo.h"
+#include "PhysicsObject.h"
+
+void CollisionInfo::Resolve()
+{
+	if (objB->GetMass() <= 0)
+	{
+		float impulseMag = Dot(-(1 + objA->GetElasticity()) * objA->GetVelocity(), _overlapNormal) / objA->GetInverseMass();
+		objA->GetPosition() += _overlapNormal * _overlapAmount;
+		objA->AddImpulse(_overlapNormal * impulseMag);
+		return;
+	}
+
+	float totalInverseMass = objA->GetInverseMass() + objB->GetInverseMass();
+
+	objA->GetPosition() += _overlapNormal * _overlapAmount * objA->GetInverseMass() / totalInverseMass;
+	objB->GetPosition() -= _overlapNormal * _overlapAmount * objB->GetInverseMass() / totalInverseMass;
+
+	//Coefficient of Restitution
+
+
+	Vec2 relativeVelocity = objB->GetVelocity() - objA->GetVelocity();
+	float relativeElasticity = objA->GetElasticity() * objB->GetElasticity();
+	float impulseMag = Dot(-(1 + relativeElasticity) * relativeVelocity, _overlapNormal) / totalInverseMass;
+	objA->AddImpulse(-_overlapNormal * impulseMag);
+	objB->AddImpulse(_overlapNormal * impulseMag);
+
+	objA->AddCollisionAccumulation(1);
+	objB->AddCollisionAccumulation(1);
+}

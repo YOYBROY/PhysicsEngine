@@ -16,13 +16,15 @@ class PhysicsObject
 
 {
 protected:
-	float _mass;
+	float _mass = 0;
 	Vec2 _position;
 	Vec2 _velocity;
 	Vec2 _acceleration;
 	float _elasticity;
 	Colour _colour;
+	Vec2 _forceAccumulator;
 	int _collisionAccumulation;
+	Vec2 _gravity = Vec2(0,0);
 
 public:
 	PhysicsObject();
@@ -34,13 +36,15 @@ public:
 	float GetMass() { return _mass; }
 	void SetMass(float mass) { _mass = mass; }
 
-	Vec2 GetPosition() { return _position; }
+	float GetInverseMass() { return 1/_mass; }
+
+	Vec2& GetPosition() { return _position; }
 	void SetPosition(Vec2 position) { _position = position; }
 
-	Vec2 GetVelocity() { return _velocity; }
+	Vec2& GetVelocity() { return _velocity; }
 	void SetVelocity(Vec2 velocity) { _velocity = velocity; }
 
-	Vec2 GetAcceleration() { return _acceleration; }
+	Vec2& GetAcceleration() { return _acceleration; }
 	void SetAcceleration(Vec2 acceleration) { _acceleration = acceleration; }
 
 	float GetElasticity() { return _elasticity; }
@@ -51,5 +55,8 @@ public:
 
 	virtual ObjectType GetObjectType() = 0;
 	
+	void AddForce(Vec2 force);
+	void AddImpulse(Vec2 impulse);
+
 	void AddCollisionAccumulation(int acummulation) { _collisionAccumulation += acummulation; }
 };

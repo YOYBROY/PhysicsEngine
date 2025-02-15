@@ -15,16 +15,26 @@ PhysicsEngine::PhysicsEngine()
 void PhysicsEngine::Initialise()
 {
 	PopulateCollisionFunctionArray();
-	//Draw Box
-	//_physicsObjects.push_back(new Circle(Vec2(-2, -1), 1, 1, 1));
-	//_physicsObjects.push_back(new Circle(Vec2(-2, -1), 1, 1, 1));
+	//Draw Circle
+	_physicsObjects.push_back(new Circle(Vec2(2, -1), 1, 1, 1, Vec2(-8, 0)));
+	_physicsObjects.push_back(new Circle(Vec2(-2, -1), 2, 5, 1, Vec2(20, 0)));
 
 	//Draw Box
-	_physicsObjects.push_back(new Box(Vec2(3, 3), 3, 1, 1, 1));
-	//_physicsObjects.push_back(new Box(Vec2(1.2f, 0), 2, 1.5f, 1, 1));
+	_physicsObjects.push_back(new Box(Vec2(3, 3), 3, 1, 4, 1, Vec2(-5,0)));
+	_physicsObjects.push_back(new Box(Vec2(-3, 3), 2, 1.5f, 2, 1, Vec2(10, 0)));
+	_physicsObjects.push_back(new Box(Vec2(0, -4), 10, 2, 1, 1, Vec2(0, 0)));
 
-	//Draw Plane
-	_physicsObjects.push_back(new Plane(Vec2(1, 0.4f), 0, 5));
+	//Draw Perfectly Square Box with Planes
+	//_physicsObjects.push_back(new Plane(Vec2(0, 1), -8));
+	//_physicsObjects.push_back(new Plane(Vec2(0, -1), -8));
+	//_physicsObjects.push_back(new Plane(Vec2(1, 0), -8));
+	//_physicsObjects.push_back(new Plane(Vec2(-1, 0), -8));
+
+	//Draw Off axis box
+	_physicsObjects.push_back(new Plane(Vec2(0.3f, 1), -8));
+	_physicsObjects.push_back(new Plane(Vec2(-0.3f, -1), -8));
+	_physicsObjects.push_back(new Plane(Vec2(1, -0.3f), -8));
+	_physicsObjects.push_back(new Plane(Vec2(-1, 0.3f), -8));
 }
 
 void PhysicsEngine::Update(float delta)
@@ -35,20 +45,15 @@ void PhysicsEngine::Update(float delta)
 		objects->Update(delta);
 	}
 
-	_physicsObjects[0]->SetPosition(cursorPos);
-
-	//Resolve
 	for (int i = 0; i < _physicsObjects.size() - 1; i++)
 	{
 		for (int j = i + 1; j < _physicsObjects.size(); j++)
 		{
 			CollisionInfo collisionInfo = CheckCollision(_physicsObjects[i], _physicsObjects[j]);
 			if (collisionInfo.objA == nullptr || collisionInfo.objB == nullptr) continue;
-
 			if (collisionInfo._overlapping)
 			{
-				collisionInfo.objA->AddCollisionAccumulation(1);
-				collisionInfo.objB->AddCollisionAccumulation(1);
+				collisionInfo.Resolve();
 			}
 		}
 	}

@@ -13,7 +13,7 @@ void PopulateCollisionFunctionArray()
 	collisionThings[CIRCLE][PLANE] = CircleToPlane;
 	collisionThings[BOX][CIRCLE] = BoxToCircle;
 	collisionThings[BOX][BOX] = BoxToBox;
-	collisionThings[BOX][PLANE] = BoxToBox;
+	collisionThings[BOX][PLANE] = BoxToPlane;
 	collisionThings[PLANE][CIRCLE] = PlaneToCircle;
 	collisionThings[PLANE][BOX] = PlaneToBox;
 	collisionThings[PLANE][PLANE] = PlaneToPlane;
@@ -29,7 +29,7 @@ CollisionInfo CircleToCircle(PhysicsObject* objA, PhysicsObject* objB)
     Circle* circleA = (Circle*)objA;
     Circle* circleB = (Circle*)objB;
 
-    Vec2 displacement = circleA->GetPosition() - circleB->GetPosition();
+    Vec2 displacement = circleB->GetPosition() - circleA->GetPosition();
     float distance = displacement.GetMagnitude();
 
     collInfo.objA = circleA;
@@ -84,7 +84,7 @@ CollisionInfo CircleToPlane(PhysicsObject* objA, PhysicsObject* objB)
 
 	collInfo.objA = circleA;
 	collInfo.objB = planeB;
-	collInfo._overlapNormal = planeB->GetUnitNormal();
+	collInfo._overlapNormal = -planeB->GetUnitNormal();
 	collInfo._overlapAmount = distance - circleA->GetRadius();
 	collInfo._overlapping = collInfo._overlapAmount < 0;
 	return collInfo;
@@ -155,18 +155,18 @@ CollisionInfo BoxToPlane(PhysicsObject* objA, PhysicsObject* objB)
 	int largestOverlapIndex = 0;
 	for (int i = 0; i < 4; i++)
 	{
-		if (distances[i] > largestDistance)
+		if (distances[i] < largestDistance)
 		{
 			largestDistance = distances[i];
 			largestOverlapIndex = i;
 		}
 	}
-
+	collInfo._closestPoint = points[largestOverlapIndex];
 	collInfo.objA = boxA;
 	collInfo.objB = planeB;
-	collInfo._overlapNormal = planeB->GetUnitNormal();
-	collInfo._overlapAmount = distances[largestOverlapIndex] - planeB->GetDistanceFromOrigin();
-	collInfo._overlapping = collInfo._overlapAmount > 0;
+	collInfo._overlapNormal = -planeB->GetUnitNormal();
+	collInfo._overlapAmount = distances[largestOverlapIndex];
+	collInfo._overlapping = collInfo._overlapAmount < 0;
 	return collInfo;
 }
 CollisionInfo PlaneToCircle(PhysicsObject* objA, PhysicsObject* objB)
