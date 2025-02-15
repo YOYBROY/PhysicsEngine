@@ -1,6 +1,7 @@
 #include "Example.h"
 #include "LineRenderer.h"
 #include "imgui.h"
+#include "TextStream.h"
 
 Example::Example()
 {
@@ -23,7 +24,16 @@ void Example::Update(float delta)
 	//Everything that your program does every frame should go here.
 	//This includes rendering done with the line renderer!
 
+	ImGui::Begin("Well Well Well");
 
+	ImGui::SliderFloat("My Random Float Slider", &someTestValue, -1, 7);
+
+	ImGui::End();
+
+
+	TextStream output(lines, cursorPos, 0.5f, Colour::GREEN.Lighten());
+
+	output << "Value is Set To " << someTestValue;
 }
 
 void Example::OnLeftClick()

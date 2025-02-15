@@ -2,6 +2,7 @@
 #include "Circle.h"
 #include "Box.h"
 #include "Plane.h"
+#include "Polygon.h"
 
 #include<iostream>
 #include <vector>
@@ -17,6 +18,8 @@ void PopulateCollisionFunctionArray()
 	collisionThings[PLANE][CIRCLE] = PlaneToCircle;
 	collisionThings[PLANE][BOX] = PlaneToBox;
 	collisionThings[PLANE][PLANE] = PlaneToPlane;
+
+	collisionThings[POLYGON][POLYGON] = PolygonToPolgon;
 }
 CollisionInfo CheckCollision(PhysicsObject* objA, PhysicsObject* objB)
 {
@@ -89,6 +92,7 @@ CollisionInfo CircleToPlane(PhysicsObject* objA, PhysicsObject* objB)
 	collInfo._overlapping = collInfo._overlapAmount < 0;
 	return collInfo;
 }
+
 CollisionInfo BoxToCircle(PhysicsObject* objA, PhysicsObject* objB)
 {
 	return CircleToBox(objB, objA);
@@ -169,6 +173,7 @@ CollisionInfo BoxToPlane(PhysicsObject* objA, PhysicsObject* objB)
 	collInfo._overlapping = collInfo._overlapAmount < 0;
 	return collInfo;
 }
+
 CollisionInfo PlaneToCircle(PhysicsObject* objA, PhysicsObject* objB)
 {
 	return CircleToPlane(objB, objA);
@@ -180,4 +185,28 @@ CollisionInfo PlaneToBox(PhysicsObject* objA, PhysicsObject* objB)
 CollisionInfo PlaneToPlane(PhysicsObject* objA, PhysicsObject* objB)
 {
 	return CollisionInfo();
+}
+
+CollisionInfo PolygonToPolgon(PhysicsObject* objA, PhysicsObject* objB)
+{
+	CollisionInfo collInfo;
+	Polygon* polyA = (Polygon*)objA;
+	Polygon* polyB = (Polygon*)objB;
+	
+	//Get all the possible normals to check
+	//Get all the vertices to project
+	//Project all the vertices on to every normal
+	//Find the min and max distances for each polygon
+	//Do Amax - Bmin and Bmax - Amin for the polygons min maxs
+	//Find the smallest overlap
+	//If the overlap is negative then there is an overlap.
+	//Return that normal and overlap amount
+
+	collInfo.objA = polyA;
+	collInfo.objB = polyB;
+	//collInfo._overlapNormal = ;
+	//collInfo._overlapAmount = ;
+	collInfo._overlapping = collInfo._overlapAmount > 0;
+	
+	return collInfo;
 }

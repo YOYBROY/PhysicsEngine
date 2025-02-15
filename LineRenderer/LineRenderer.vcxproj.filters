@@ -62,12 +62,6 @@
     <ClCompile Include="PhysicsEngine.cpp">
       <Filter>Game\PhysicsEngine</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsObject.cpp">
-      <Filter>Game\PhysicsEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="Circle.cpp">
-      <Filter>Game\PhysicsEngine</Filter>
-    </ClCompile>
     <ClCompile Include="CollisionFunctions.cpp">
       <Filter>Game\PhysicsEngine</Filter>
     </ClCompile>
@@ -75,10 +69,19 @@
       <Filter>Game\PhysicsEngine</Filter>
     </ClCompile>
     <ClCompile Include="Box.cpp">
-      <Filter>Game\PhysicsEngine</Filter>
+      <Filter>Game\PhysicsEngine\PhysicsObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Circle.cpp">
+      <Filter>Game\PhysicsEngine\PhysicsObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsObject.cpp">
+      <Filter>Game\PhysicsEngine\PhysicsObjects</Filter>
     </ClCompile>
     <ClCompile Include="Plane.cpp">
-      <Filter>Game\PhysicsEngine</Filter>
+      <Filter>Game\PhysicsEngine\PhysicsObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Polygon.cpp">
+      <Filter>Game\PhysicsEngine\PhysicsObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -166,12 +169,6 @@
     <ClInclude Include="PhysicsEngine.h">
       <Filter>Game\PhysicsEngine</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsObject.h">
-      <Filter>Game\PhysicsEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="Circle.h">
-      <Filter>Game\PhysicsEngine</Filter>
-    </ClInclude>
     <ClInclude Include="CollisionFunctions.h">
       <Filter>Game\PhysicsEngine</Filter>
     </ClInclude>
@@ -179,10 +176,19 @@
       <Filter>Game\PhysicsEngine</Filter>
     </ClInclude>
     <ClInclude Include="Box.h">
-      <Filter>Game\PhysicsEngine</Filter>
+      <Filter>Game\PhysicsEngine\PhysicsObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Circle.h">
+      <Filter>Game\PhysicsEngine\PhysicsObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsObject.h">
+      <Filter>Game\PhysicsEngine\PhysicsObjects</Filter>
     </ClInclude>
     <ClInclude Include="Plane.h">
-      <Filter>Game\PhysicsEngine</Filter>
+      <Filter>Game\PhysicsEngine\PhysicsObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Polygon.h">
+      <Filter>Game\PhysicsEngine\PhysicsObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +212,9 @@
     </Filter>
     <Filter Include="Game\PhysicsEngine">
       <UniqueIdentifier>{921713ef-a359-4cc8-b928-d0e271166737}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\PhysicsEngine\PhysicsObjects">
+      <UniqueIdentifier>{b5e57474-9759-4a3c-be00-9f2d31eaffe2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

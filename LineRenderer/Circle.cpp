@@ -16,7 +16,14 @@ void Circle::Draw(LineRenderer* lines)
 	}
 	else
 	{
-		_colour = Colour::GREEN;
+		if (_mass > 1)
+		{
+			_colour = Colour::BLUE;
+		}
+		else
+		{
+			_colour = Colour::GREEN;
+		}
 	}
 
 	lines->DrawCircle(_position, _radius, _colour);

@@ -8,6 +8,7 @@ enum ObjectType
 	CIRCLE,
 	BOX,
 	PLANE,
+	POLYGON,
 
 	COUNT
 };

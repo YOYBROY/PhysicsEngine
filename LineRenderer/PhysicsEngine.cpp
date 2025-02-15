@@ -5,6 +5,7 @@
 #include "Circle.h"
 #include "Box.h"
 #include "Plane.h"
+#include "Polygon.h"
 
 PhysicsEngine::PhysicsEngine()
 {
@@ -15,26 +16,37 @@ PhysicsEngine::PhysicsEngine()
 void PhysicsEngine::Initialise()
 {
 	PopulateCollisionFunctionArray();
-	//Draw Circle
-	_physicsObjects.push_back(new Circle(Vec2(2, -1), 1, 1, 1, Vec2(-8, 0)));
-	_physicsObjects.push_back(new Circle(Vec2(-2, -1), 2, 5, 1, Vec2(20, 0)));
+	//Draw Newtons Cradle
+	//_physicsObjects.push_back(new Circle(Vec2(4, 0), 0.3f, 1, 1, Vec2(-15, 0)));
+	//_physicsObjects.push_back(new Circle(Vec2(2, 0), 0.3f, 1, 1));
+	//_physicsObjects.push_back(new Circle(Vec2(1, 0), 0.3f, 1, 1));
+	//_physicsObjects.push_back(new Circle(Vec2(0, 0), 0.3f, 5, 1)); //Asymmetrical Cradle with inconsistent mass
+	//_physicsObjects.push_back(new Circle(Vec2(-1, 0), 0.3f, 1, 1));
+	//_physicsObjects.push_back(new Circle(Vec2(-2, 0), 0.3f, 1, 1));
+	//_physicsObjects.push_back(new Circle(Vec2(-3, 0), 0.3f, 1, 1));
+	
+	//_physicsObjects.push_back(new Circle(Vec2(-3, 0), 1, 1, 1));
 
 	//Draw Box
-	_physicsObjects.push_back(new Box(Vec2(3, 3), 3, 1, 4, 1, Vec2(-5,0)));
-	_physicsObjects.push_back(new Box(Vec2(-3, 3), 2, 1.5f, 2, 1, Vec2(10, 0)));
-	_physicsObjects.push_back(new Box(Vec2(0, -4), 10, 2, 1, 1, Vec2(0, 0)));
+	//_physicsObjects.push_back(new Box(Vec2(1, 0.5f), 1, 1, 1, 0.5f));
+	//_physicsObjects.push_back(new Box(Vec2(6, 1.5), 3, 3, 10, 0.4f, Vec2(-2, 0)));
+	//_physicsObjects.push_back(new Box(Vec2(0, -4), 10, 2, 1, 1, Vec2(0, 0)));
 
 	//Draw Perfectly Square Box with Planes
 	//_physicsObjects.push_back(new Plane(Vec2(0, 1), -8));
 	//_physicsObjects.push_back(new Plane(Vec2(0, -1), -8));
-	//_physicsObjects.push_back(new Plane(Vec2(1, 0), -8));
-	//_physicsObjects.push_back(new Plane(Vec2(-1, 0), -8));
+	//_physicsObjects.push_back(new Plane(Vec2(1, 0), -10));
+	//_physicsObjects.push_back(new Plane(Vec2(-1, 0), -10));
 
 	//Draw Off axis box
-	_physicsObjects.push_back(new Plane(Vec2(0.3f, 1), -8));
-	_physicsObjects.push_back(new Plane(Vec2(-0.3f, -1), -8));
-	_physicsObjects.push_back(new Plane(Vec2(1, -0.3f), -8));
-	_physicsObjects.push_back(new Plane(Vec2(-1, 0.3f), -8));
+	//_physicsObjects.push_back(new Plane(Vec2(0.5f, 0.5), -5));
+	//_physicsObjects.push_back(new Plane(Vec2(-0.5f, -0.5), -5));
+	//_physicsObjects.push_back(new Plane(Vec2(0.5, -0.5), -5));
+	//_physicsObjects.push_back(new Plane(Vec2(-0.5, 0.5), -5));
+
+	//Draw Polygons
+	_physicsObjects.push_back(new Polygon(Vec2(0, 1), 5, 1.2f, 1, 1));
+	//_physicsObjects.push_back(new Polygon(Vec2(3, 5), 8, 2, 1, 1));
 }
 
 void PhysicsEngine::Update(float delta)
