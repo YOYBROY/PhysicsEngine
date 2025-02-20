@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Vec2.h"
+#include <vector>
 
 class PhysicsObject;
 
@@ -12,6 +13,8 @@ struct CollisionInfo
 	float _overlapAmount;
 	bool _overlapping;
 	Vec2 _overlapNormal;
+
+	std::vector<Vec2> polygonVertices;
 
 	void Resolve();
 };

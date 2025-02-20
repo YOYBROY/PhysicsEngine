@@ -10,15 +10,14 @@ void CollisionInfo::Resolve()
 		objA->AddImpulse(_overlapNormal * impulseMag);
 		return;
 	}
-
+	
 	float totalInverseMass = objA->GetInverseMass() + objB->GetInverseMass();
-
+	
 	objA->GetPosition() += _overlapNormal * _overlapAmount * objA->GetInverseMass() / totalInverseMass;
 	objB->GetPosition() -= _overlapNormal * _overlapAmount * objB->GetInverseMass() / totalInverseMass;
-
+	
 	//Coefficient of Restitution
-
-
+	
 	Vec2 relativeVelocity = objB->GetVelocity() - objA->GetVelocity();
 	float relativeElasticity = objA->GetElasticity() * objB->GetElasticity();
 	float impulseMag = Dot(-(1 + relativeElasticity) * relativeVelocity, _overlapNormal) / totalInverseMass;
