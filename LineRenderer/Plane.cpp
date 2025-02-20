@@ -3,11 +3,13 @@
 Plane::Plane(Vec2 unitNormal, float distanceFromOrigin) : _unitNormal(unitNormal.Normalise()), _distanceFromOrigin(distanceFromOrigin)
 {
 	_elasticity = 1;
+	_mass = 0;
 }
 
 Plane::Plane(Vec2 unitNormal, float distanceFromOrigin, float length) : _unitNormal(unitNormal.Normalise()), _distanceFromOrigin(distanceFromOrigin), _length(length)
 {
 	_elasticity = 1;
+	_mass = 0;
 }
 
 void Plane::Update(float delta)

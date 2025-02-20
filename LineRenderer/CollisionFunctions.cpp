@@ -14,14 +14,20 @@ void PopulateCollisionFunctionArray()
 	collisionThings[CIRCLE][BOX] = CircleToBox;
 	collisionThings[CIRCLE][PLANE] = CircleToPlane;
 	collisionThings[CIRCLE][POLYGON] = CircleToPolygon;
+
 	collisionThings[BOX][CIRCLE] = BoxToCircle;
 	collisionThings[BOX][BOX] = BoxToBox;
 	collisionThings[BOX][PLANE] = BoxToPlane;
+	//collisionThings[BOX][POLYGON] = BoxToPolygon;
+
 	collisionThings[PLANE][CIRCLE] = PlaneToCircle;
 	collisionThings[PLANE][BOX] = PlaneToBox;
 	collisionThings[PLANE][PLANE] = PlaneToPlane;
+	collisionThings[PLANE][POLYGON] = PlaneToPolygon;
 
 	collisionThings[POLYGON][CIRCLE] = PolygonToCircle;
+	//collisionThings[POLYGON][BOX] = PolygonToBox;
+	collisionThings[POLYGON][PLANE] = PolygonToPlane;
 	collisionThings[POLYGON][POLYGON] = PolygonToPolgon;
 }
 CollisionInfo CheckCollision(PhysicsObject* objA, PhysicsObject* objB)
@@ -31,25 +37,25 @@ CollisionInfo CheckCollision(PhysicsObject* objA, PhysicsObject* objB)
 
 CollisionInfo CircleToCircle(PhysicsObject* objA, PhysicsObject* objB)
 {
-    CollisionInfo collInfo;
-    Circle* circleA = (Circle*)objA;
-    Circle* circleB = (Circle*)objB;
+	CollisionInfo collInfo;
+	Circle* circleA = (Circle*)objA;
+	Circle* circleB = (Circle*)objB;
 
-    Vec2 displacement = circleB->GetPosition() - circleA->GetPosition();
-    float distance = displacement.GetMagnitude();
+	Vec2 displacement = circleB->GetPosition() - circleA->GetPosition();
+	float distance = displacement.GetMagnitude();
 
-    collInfo.objA = circleA;
-    collInfo.objB = circleB;
-    collInfo._overlapNormal = displacement.Normalise();
-    collInfo._overlapAmount = distance - (circleA->GetRadius() + circleB->GetRadius());
-    collInfo._overlapping = collInfo._overlapAmount < 0;
-	
+	collInfo.objA = circleA;
+	collInfo.objB = circleB;
+	collInfo._overlapNormal = displacement.Normalise();
+	collInfo._overlapAmount = distance - (circleA->GetRadius() + circleB->GetRadius());
+	collInfo._overlapping = collInfo._overlapAmount < 0;
+
 	if (collInfo._overlapping)
 	{
 		std::cout << "Circle to Circle" << std::endl;
 	}
 
-    return collInfo;
+	return collInfo;
 }
 CollisionInfo CircleToBox(PhysicsObject* objA, PhysicsObject* objB)
 {
@@ -147,7 +153,7 @@ CollisionInfo CircleToPolygon(PhysicsObject* objA, PhysicsObject* objB)
 			smallestOverlapNormalIndex = i;
 		}
 	}
-	
+
 	collInfo.polygonVertices = polyB->GetWorldSpaceVertices();
 	collInfo.objA = circleA;
 	collInfo.objB = polyB;
@@ -252,18 +258,65 @@ CollisionInfo PlaneToPlane(PhysicsObject* objA, PhysicsObject* objB)
 	return CollisionInfo();
 }
 
+CollisionInfo PlaneToPolygon(PhysicsObject* objA, PhysicsObject* objB)
+{
+	CollisionInfo collInfo;
+	Plane* planeA = (Plane*)objA;
+	Polygon* polyB = (Polygon*)objB;
+
+	//Get all the vertices to project
+	std::vector<Vec2> polyBVerts = polyB->GetWorldSpaceVertices();
+
+	float smallestOverlap = FLT_MAX;
+	int smallestOverlapNormalIndex = 0;
+
+	//Project all the vertices on to every normal
+	//Find the min and max distances for each polygon
+	float AMin = -FLT_MAX;
+	float AMax = planeA->GetDistanceFromOrigin();
+	float polyBMin = FLT_MAX;
+	float polyBMax = -FLT_MAX;
+
+	for (int j = 0; j < polyBVerts.size(); j++)
+	{
+		float projectionLength = Dot(polyBVerts[j], planeA->GetUnitNormal());
+		polyBMax = projectionLength > polyBMax ? projectionLength : polyBMax;
+		polyBMin = projectionLength < polyBMin ? projectionLength : polyBMin;
+	}
+
+	float overlap1 = AMax - polyBMin;
+	float overlap2 = polyBMax - AMin;
+	float localSmallestOverlap = overlap1 < overlap2 ? overlap1 : overlap2;
+
+	if (localSmallestOverlap < smallestOverlap)
+	{
+		smallestOverlap = localSmallestOverlap;
+	}
+
+	collInfo.objA = planeA;
+	collInfo.objB = polyB;
+	collInfo._overlapNormal = planeA->GetUnitNormal();
+	collInfo._overlapAmount = smallestOverlap;
+	collInfo._overlapping = collInfo._overlapAmount > 0;
+	return collInfo;
+}
+
 CollisionInfo PolygonToCircle(PhysicsObject* objA, PhysicsObject* objB)
 {
 	return CircleToPolygon(objB, objA);
 }
 
 
+CollisionInfo PolygonToPlane(PhysicsObject* objA, PhysicsObject* objB)
+{
+	return PlaneToPolygon(objB, objA);
+}
 CollisionInfo PolygonToPolgon(PhysicsObject* objA, PhysicsObject* objB)
 {
 	CollisionInfo collInfo;
 	Polygon* polyA = (Polygon*)objA;
 	Polygon* polyB = (Polygon*)objB;
-	
+
 	//Get all the possible normals to check
 	std::vector<Vec2> projectionNormals;
 
@@ -282,7 +335,7 @@ CollisionInfo PolygonToPolgon(PhysicsObject* objA, PhysicsObject* objB)
 	float smallestOverlap = FLT_MAX;
 	int smallestOverlapNormalIndex = 0;
 
-	Vec2 displacement = polyA ->GetPosition() - polyB->GetPosition();
+	Vec2 displacement = polyA->GetPosition() - polyB->GetPosition();
 
 	//Project all the vertices on to every normal
 	//Find the min and max distances for each polygon
@@ -315,7 +368,7 @@ CollisionInfo PolygonToPolgon(PhysicsObject* objA, PhysicsObject* objB)
 			smallestOverlap = localSmallestOverlap;
 			smallestOverlapNormalIndex = i;
 		}
-	}	
+	}
 
 	collInfo.objA = polyA;
 	collInfo.objB = polyB;
