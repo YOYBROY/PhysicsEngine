@@ -10,7 +10,7 @@ void CollisionInfo::Resolve()
 		objA->AddImpulse(_overlapNormal * impulseMag);
 		return;
 	}
-
+	
 	if (objA->GetMass() <= 0)
 	{
 		float impulseMag = Dot(-(1 + objB->GetElasticity()) * objB->GetVelocity(), _overlapNormal) / objB->GetInverseMass();
@@ -32,6 +32,6 @@ void CollisionInfo::Resolve()
 	objA->AddImpulse(-_overlapNormal * impulseMag);
 	objB->AddImpulse(_overlapNormal * impulseMag);
 
-	objA->AddCollisionAccumulation(1);
-	objB->AddCollisionAccumulation(1);
+	objA->SetColour(Colour::RED);
+	objB->SetColour(Colour::RED);
 }

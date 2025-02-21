@@ -1,19 +1,15 @@
 #pragma once
 
-#include "PhysicsObject.h"
+#include <vector>
 
-class Box : public PhysicsObject
+#include "PhysicsObject.h"
+#include "Polygon.h"
+
+class Box : public Polygon
 {
 protected:
 	float _width;
 	float _height;
-	float _minX;
-	float _maxX;
-	float _minY;
-	float _maxY;
-
-	ObjectType _objectType = BOX;
-
 public:
 	Box(Vec2 position, float width, float height, float mass, float elasticity);
 	Box(Vec2 position, float width, float height, float mass, float elasticity, Vec2 velocity);
@@ -27,10 +23,10 @@ public:
 	float GetHeight() { return _height; }
 	void GetHeight(float height) { _height = height; }
 
-	float GetMinX() { return _minX; }
-	float GetMaxX() { return _maxX; }
-	float GetMinY() { return _minY; }
-	float GetMaxY() { return _maxY; }
+	std::vector<Vec2> GetVertices() { return _vertices; }
+	std::vector<Vec2> GetWorldSpaceVertices();
+	//std::vector<Vec2> GetNormals() { return _normals; }
+	std::vector<Vec2> GetEdgeCentres() { return _edgeCentres; }
 
 	ObjectType GetObjectType() override { return _objectType; }
 };

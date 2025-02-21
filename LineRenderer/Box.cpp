@@ -1,53 +1,59 @@
 #include "Box.h"
 
-Box::Box(Vec2 position, float width, float height, float mass, float elasticity) : PhysicsObject(position, mass, elasticity), _width(width), _height(height)
+Box::Box(Vec2 position, float width, float height, float mass, float elasticity) : Polygon(position, mass, elasticity), _width(width), _height(height)
 {
-	_maxX = position.x + width * 0.5f;
-	_minX = position.x - width * 0.5f;
-	_maxY = position.y + height * 0.5f;
-	_minY = position.y - height * 0.5f;
+	float _maxX = position.x + width * 0.5f;
+	float _minX = position.x - width * 0.5f;
+	float _maxY = position.y + height * 0.5f;
+	float _minY = position.y - height * 0.5f;
+
+	_vertices.push_back(Vec2(_minX, _maxY));
+	_vertices.push_back(Vec2(_maxX, _maxY));
+	_vertices.push_back(Vec2(_maxX, _minY));
+	_vertices.push_back(Vec2(_minX, _minY));
+
+	Vec2 next;
+	for (int i = 0; i < _vertices.size(); i++)
+	{
+		if (i == _vertices.size() - 1) { next = _vertices[0]; }
+		else { next = _vertices[i + 1]; }
+
+ 		_normals.push_back(Vec2(-(next.y - _vertices[i].y), next.x - _vertices[i].x).Normalise());
+		_edgeCentres.push_back((_vertices[i] + next) * 0.5f);
+	}
 }
 
-Box::Box(Vec2 position, float width, float height, float mass, float elasticity, Vec2 velocity) : PhysicsObject(position, mass, elasticity, velocity), _width(width), _height(height)
+Box::Box(Vec2 position, float width, float height, float mass, float elasticity, Vec2 velocity) : Box(position, width, height, mass, elasticity)
 {
-	_maxX = position.x + width * 0.5f;
-	_minX = position.x - width * 0.5f;
-	_maxY = position.y + height * 0.5f;
-	_minY = position.y - height * 0.5f;
+	_velocity = velocity;
 }
-
-
 
 void Box::Update(float delta)
 {
 	PhysicsObject::Update(delta);
-	_maxX = _position.x + _width * 0.5f;
-	_minX = _position.x - _width * 0.5f;
-	_maxY = _position.y + _height * 0.5f;
-	_minY = _position.y - _height * 0.5f;
 }
 
 void Box::Draw(LineRenderer* lines)
 {
-	if (_collisionAccumulation > 0)
+	Vec2 next;
+	for (int i = 0; i < _vertices.size(); i++)
 	{
-		_colour = Colour::RED;
+		if (i == _vertices.size() - 1) { next = _vertices[0]; }
+		else { next = _vertices[i + 1]; }
+		lines->DrawLineSegment(_position + _vertices[i], _position + next, _colour);
+
+		//Draw normals debug
+		lines->DrawLineWithArrow((_position + _edgeCentres[i]), (_position + _edgeCentres[i] + _normals[i]));
 	}
-	else
+	_colour = Colour::GREEN;
+}
+
+std::vector<Vec2> Box::GetWorldSpaceVertices()
+{
+	std::vector<Vec2> worldSpaceVertices;
+	for (Vec2 vertex : _vertices)
 	{
-		_colour = Colour::GREEN;
+		worldSpaceVertices.push_back(_position + vertex);
 	}
-
-	Vec2 point1 = Vec2(_minX, _maxY);
-	Vec2 point2 = Vec2(_maxX, _maxY);
-	Vec2 point3 = Vec2(_maxX, _minY);
-	Vec2 point4 = Vec2(_minX, _minY);
-
-	//Clockwise from top left
-	lines->DrawLineSegment(point1, point2, _colour);
-	lines->DrawLineSegment(point2, point3, _colour);
-	lines->DrawLineSegment(point3, point4, _colour);
-	lines->DrawLineSegment(point4, point1, _colour);
-
-	_collisionAccumulation = 0;
+	return worldSpaceVertices;
 }

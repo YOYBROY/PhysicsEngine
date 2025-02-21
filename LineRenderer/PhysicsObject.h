@@ -14,7 +14,6 @@ enum ObjectType
 };
 
 class PhysicsObject
-
 {
 protected:
 	float _mass = 0;
@@ -24,7 +23,6 @@ protected:
 	float _elasticity;
 	Colour _colour;
 	Vec2 _forceAccumulator;
-	int _collisionAccumulation;
 	Vec2 _gravity = Vec2(0,0);
 
 public:
@@ -58,6 +56,4 @@ public:
 	
 	void AddForce(Vec2 force);
 	void AddImpulse(Vec2 impulse);
-
-	void AddCollisionAccumulation(int acummulation) { _collisionAccumulation += acummulation; }
 };

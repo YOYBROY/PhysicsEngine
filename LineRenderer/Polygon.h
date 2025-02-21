@@ -15,7 +15,10 @@ protected:
 
 public:
 	Polygon(Vec2 position, int vertCount, float padding, float mass, float elasticity);
+	Polygon(Vec2 position, int vertCount, float padding, float mass, float elasticity, float orientation);
 	Polygon(Vec2 position, int vertCount, float padding, float mass, float elasticity, Vec2 velocity);
+	Polygon(Vec2 position, int vertCount, float padding, float mass, float elasticity, float orientation, Vec2 velocity);
+	Polygon(Vec2 position, float mass, float elasticity);
 
 	void Draw(LineRenderer* lines) override;
 

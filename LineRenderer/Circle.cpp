@@ -10,24 +10,7 @@ Circle::Circle(Vec2 position, float radius, float mass, float elasticity, Vec2 v
 
 void Circle::Draw(LineRenderer* lines)
 {
-	if (_collisionAccumulation > 0)
-	{
-		_colour = Colour::RED;
-	}
-	else
-	{
-		if (_mass > 1)
-		{
-			_colour = Colour::BLUE;
-		}
-		else
-		{
-			_colour = Colour::GREEN;
-		}
-	}
-
 	lines->DrawCircle(_position, _radius, _colour);
 	lines->DrawCross(_position, 0.1f);
-
-	_collisionAccumulation = 0;
+	_colour = Colour::GREEN;
 }
