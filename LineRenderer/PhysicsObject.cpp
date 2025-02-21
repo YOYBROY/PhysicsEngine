@@ -24,6 +24,15 @@ void PhysicsObject::Draw(LineRenderer* lines)
 {
 }
 
+float PhysicsObject::GetInverseMass()
+{
+	if (_mass == 0)
+	{
+		return 0;
+	}
+	return 1 / _mass;
+}
+
 void PhysicsObject::AddForce(Vec2 force)
 {
 	_forceAccumulator += force;

@@ -168,7 +168,7 @@ CollisionInfo PlaneToPolygon(PhysicsObject* objA, PhysicsObject* objB)
 
 	collInfo.objA = planeA;
 	collInfo.objB = polyB;
-	collInfo._overlapNormal = planeA->GetUnitNormal();
+	collInfo._overlapNormal = -planeA->GetUnitNormal();
 	collInfo._overlapAmount = smallestOverlap;
 	collInfo._overlapping = collInfo._overlapAmount > 0;
 	return collInfo;

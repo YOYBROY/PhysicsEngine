@@ -35,7 +35,7 @@ public:
 	float GetMass() { return _mass; }
 	void SetMass(float mass) { _mass = mass; }
 
-	float GetInverseMass() { return 1/_mass; }
+	float GetInverseMass();
 
 	Vec2& GetPosition() { return _position; }
 	void SetPosition(Vec2 position) { _position = position; }

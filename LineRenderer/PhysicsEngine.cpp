@@ -18,7 +18,7 @@ void PhysicsEngine::Initialise()
 	PopulateCollisionFunctionArray();
 	//_physicsObjects.push_back(new Polygon(Vec2(3, 5), 4, 2, 4, 1, 20));
 	//Create Newtons Cradle
-	_physicsObjects.push_back(new Circle(Vec2(3, 0), 0.3f, 1, 0.9f, Vec2(-6, 2)));
+	_physicsObjects.push_back(new Circle(Vec2(-3, 6), 2, 0, 0.9f));
 	_physicsObjects.push_back(new Circle(Vec2(2, 0), 0.3f, 1, 0.9f, Vec2(0, 2)));
 	_physicsObjects.push_back(new Circle(Vec2(1, 0), 0.3f, 1, 0.9f, Vec2(0, 2)));
 	_physicsObjects.push_back(new Circle(Vec2(0, 0), 0.3f, 1, 0.9f, Vec2(0, 2))); //Asymmetrical Cradle with inconsistent mass
@@ -27,10 +27,10 @@ void PhysicsEngine::Initialise()
 	_physicsObjects.push_back(new Circle(Vec2(-3, 0), 0.3f, 1, 0.9f, Vec2(0, 2)));
 	
 	//Create Box
-	//_physicsObjects.push_back(new Box(Vec2(1.6, 0.9), 1.6f, 0.9f, 1, 1, Vec2(-1.6f, -0.9f)));
+	_physicsObjects.push_back(new Box(Vec2(1.6, 0.9), 1.6f, 0.9f, 1, 1, Vec2(-1.6f, -0.9f)));
 	_physicsObjects.push_back(new Box(Vec2(-0.9*8, 1.6*4.5), 1.6f, 0.9f, 1, 1, Vec2(1.6f, -0.9f)));
-	//_physicsObjects.push_back(new Box(Vec2(6, 1.5), 3, 3, 10, 1));
-	_physicsObjects.push_back(new Box(Vec2(0, -4), 3, 2, 1, 1, Vec2(0, 0)));
+	_physicsObjects.push_back(new Box(Vec2(6, 1.5), 3, 3, 0, 1));
+	//_physicsObjects.push_back(new Box(Vec2(0, -4), 3, 2, 1, 1, Vec2(0, 0)));
 	//_physicsObjects.push_back(new Polygon(Vec2(3, -5), 8, 2, 4, 1, 360/16));
 	
 	//Create Perfectly Square Box with Planes
