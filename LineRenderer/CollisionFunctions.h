@@ -2,7 +2,6 @@
 
 #include "CollisionInfo.h"
 #include "PhysicsObject.h"
-#include "Application.h"
 #include <functional>
 
 inline std::function<CollisionInfo(PhysicsObject*, PhysicsObject*)> collisionThings[(int)ObjectType::COUNT][(int)ObjectType::COUNT];

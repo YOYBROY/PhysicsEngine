@@ -26,14 +26,14 @@ void Example::Update(float delta)
 
 	ImGui::Begin("Well Well Well");
 
-	ImGui::SliderFloat("My Random Float Slider", &someTestValue, -1, 7);
+	ImGui::SliderFloat("DVD", &someTestValue, -1, 7);
 
 	ImGui::End();
 
 
 	TextStream output(lines, cursorPos, 0.5f, Colour::GREEN.Lighten());
 
-	output << "Value is Set To " << someTestValue;
+	output << "DVD " << someTestValue;
 }
 
 void Example::OnLeftClick()

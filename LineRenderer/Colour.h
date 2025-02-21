@@ -16,6 +16,8 @@ struct Colour
 	static const Colour RED;
 	static const Colour GREEN;
 	static const Colour BLUE;
+	static const Colour SHREKGREEN;
+
 
 	static const Colour CYAN;
 	static const Colour MAGENTA;

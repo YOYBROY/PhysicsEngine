@@ -42,11 +42,6 @@ CollisionInfo CircleToCircle(PhysicsObject* objA, PhysicsObject* objB)
 	collInfo._overlapAmount = distance - (circleA->GetRadius() + circleB->GetRadius());
 	collInfo._overlapping = collInfo._overlapAmount < 0;
 
-	if (collInfo._overlapping)
-	{
-		std::cout << "Circle to Circle" << std::endl;
-	}
-
 	return collInfo;
 }
 CollisionInfo CircleToPlane(PhysicsObject* objA, PhysicsObject* objB)

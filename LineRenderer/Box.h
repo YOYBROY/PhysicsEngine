@@ -13,6 +13,8 @@ protected:
 public:
 	Box(Vec2 position, float width, float height, float mass, float elasticity);
 	Box(Vec2 position, float width, float height, float mass, float elasticity, Vec2 velocity);
+	Box(Vec2 position, float width, float height, float mass, float elasticity, float orientation);
+	Box(Vec2 position, float width, float height, float mass, float elasticity, float orientation, Vec2 velocity);
 
 	void Update(float delta) override;
 	void Draw(LineRenderer* lines) override;
@@ -22,11 +24,4 @@ public:
 
 	float GetHeight() { return _height; }
 	void GetHeight(float height) { _height = height; }
-
-	std::vector<Vec2> GetVertices() { return _vertices; }
-	std::vector<Vec2> GetWorldSpaceVertices();
-	//std::vector<Vec2> GetNormals() { return _normals; }
-	std::vector<Vec2> GetEdgeCentres() { return _edgeCentres; }
-
-	ObjectType GetObjectType() override { return _objectType; }
 };

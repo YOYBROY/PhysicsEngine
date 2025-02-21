@@ -26,6 +26,5 @@ public:
 	std::vector<Vec2> GetWorldSpaceVertices();
 	std::vector<Vec2> GetNormals() { return _normals; }
 	std::vector<Vec2> GetEdgeCentres() { return _edgeCentres; }
-
 	ObjectType GetObjectType() override { return _objectType; }
 };

@@ -4,6 +4,7 @@
 const Colour Colour::RED = { 1, 0, 0 };
 const Colour Colour::GREEN = { 0, 1, 0 };
 const Colour Colour::BLUE = { 0, 0, 1 };
+const Colour Colour::SHREKGREEN = { 0.459f, 0.961f, 0.078f };
 
 const Colour Colour::CYAN = { 0, 1, 1 };
 const Colour Colour::MAGENTA = { 1, 0, 1 };
@@ -33,8 +34,8 @@ Colour Colour::Invert() const
 Colour Colour::Mix(Colour base, Colour overlay, float alpha)
 {
 	return Colour(
-		Lerp(base.r, overlay.r, alpha), 
-		Lerp(base.g, overlay.g, alpha), 
+		Lerp(base.r, overlay.r, alpha),
+		Lerp(base.g, overlay.g, alpha),
 		Lerp(base.b, overlay.b, alpha)
 	);
 }

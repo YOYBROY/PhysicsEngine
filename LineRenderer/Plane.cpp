@@ -34,5 +34,5 @@ void Plane::Draw(LineRenderer* lines)
 	}
 	
 	lines->DrawLineSegment(point1, point2);
-	lines->DrawLineWithArrow(planeCenter, _unitNormal + planeCenter);
+	//lines->DrawLineWithArrow(planeCenter, _unitNormal + planeCenter);
 }

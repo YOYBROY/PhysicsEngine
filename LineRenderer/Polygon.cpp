@@ -66,9 +66,9 @@ void Polygon::Draw(LineRenderer* lines)
 		lines->DrawLineSegment(_position + _vertices[i], _position + next, _colour);
 
 		//Draw normals debug
-		lines->DrawLineWithArrow((_position + _edgeCentres[i]), (_position + _edgeCentres[i] + _normals[i]));
+		//lines->DrawLineWithArrow((_position + _edgeCentres[i]), (_position + _edgeCentres[i] + _normals[i]));
 	}
-	_colour = Colour::GREEN;
+	_colour = Colour::SHREKGREEN;
 }
 
 std::vector<Vec2> Polygon::GetWorldSpaceVertices()
