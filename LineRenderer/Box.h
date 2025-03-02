@@ -10,6 +10,7 @@ class Box : public Polygon
 protected:
 	float _width;
 	float _height;
+	bool _visible = true;
 public:
 	Box(Vec2 position, float width, float height, float mass, float elasticity);
 	Box(Vec2 position, float width, float height, float mass, float elasticity, Vec2 velocity);
@@ -23,5 +24,8 @@ public:
 	void SetWidth(float width) { _width = width; }
 
 	float GetHeight() { return _height; }
-	void GetHeight(float height) { _height = height; }
+	void SetHeight(float height) { _height = height; }
+
+	bool GetVisible() { return _visible; }
+	void SetVisible(bool visible) { _visible = visible; }
 };

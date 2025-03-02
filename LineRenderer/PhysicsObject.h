@@ -23,7 +23,7 @@ protected:
 	float _elasticity;
 	Colour _colour;
 	Vec2 _forceAccumulator;
-	Vec2 _gravity = Vec2(0,0);
+	Vec2 _gravity = Vec2(0,-9.8f);
 
 public:
 	PhysicsObject();
