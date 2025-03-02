@@ -33,45 +33,51 @@ void PhysicsEngine::Initialise()
 		{
 			if (level.At(x, y) == TileType::PLATFORM)
 			{
-				if (false)
+				int runningBoxType = 0;
+				if (true)
 				{
 					//left
 					if (x == 0)
 					{
-						_staticBodies.push_back(new Polygon(Vec2(x, -y + level.GetHeight() - 0.5), 2, 0.5, 0, 0.5f));
+						runningBoxType += 13;
 					}
 					else if (level.At(x - 1, y) == TileType::EMPTY)
 					{
-						_staticBodies.push_back(new Polygon(Vec2(x, -y + level.GetHeight() - 0.5), 2, 0.5, 0, 0.5f));
+						runningBoxType += 13;
 					}
 					//right
 					if (x == level.GetWidth() - 1)
 					{
-						_staticBodies.push_back(new Polygon(Vec2(x + 1, -y + level.GetHeight() - 0.5), 2, 0.5, 0, 1));
+						runningBoxType += 7;
 					}
 					else if (level.At(x + 1, y) == TileType::EMPTY)
 					{
-						_staticBodies.push_back(new Polygon(Vec2(x + 1, -y + level.GetHeight() - 0.5), 2, 0.5, 0, 1));
+						runningBoxType += 7;
 					}
 					//up
 					if (y == 0)
 					{
-						_staticBodies.push_back(new Polygon(Vec2(x + 0.5, -y + level.GetHeight()), 2, 0.5, 0, 1, 90));
+						runningBoxType += 3;
 					}
 					else if (level.At(x, y - 1) == TileType::EMPTY)
 					{
-						_staticBodies.push_back(new Polygon(Vec2(x + 0.5, -y + level.GetHeight()), 2, 0.5, 0, 1, 90));
+						runningBoxType += 3;
 					}
 					//down
 					if (y == level.GetHeight() - 1)
 					{
-						_staticBodies.push_back(new Polygon(Vec2(x + 0.5, -y + level.GetHeight() - 1), 2, 0.5, 0, 1, 90));
+						runningBoxType += 11;
 					}
 					else if (level.At(x, y + 1) == TileType::EMPTY)
 					{
-						_staticBodies.push_back(new Polygon(Vec2(x + 0.5, -y + level.GetHeight() - 1), 2, 0.5, 0, 1, 90));
+						runningBoxType += (int)BoxType::D;
 					}
 				}
+
+				Box* newPlatform = new Box(Vec2(x + 0.5f, level.GetHeight() - y - 0.5f), 1, 1, 0, 1);
+				newPlatform->SetBoxType(runningBoxType);
+				_staticBodies.push_back(newPlatform);
+				continue;
 				
 				if (runningCount == 0)
 				{
@@ -84,6 +90,7 @@ void PhysicsEngine::Initialise()
 					//end run and create box
 					Box* newPlatform = new Box(Vec2(runningPos.x + (runningCount * 0.5f), -y + level.GetHeight() - 0.5f), runningCount, 1, 0, 1);
 					newPlatform->SetVisible(false);
+					newPlatform->SetBoxType(3);
 					_staticBodies.push_back(newPlatform);
 					runningCount = 0;
 					runningPos = Vec2(0, 0);
@@ -92,6 +99,7 @@ void PhysicsEngine::Initialise()
 			}
 			else 
 			{
+				continue;
 				Box* newPlatform = new Box(Vec2(runningPos.x + (runningCount * 0.5f), -y + level.GetHeight() - 0.5f), runningCount, 1, 0, 1);
 				newPlatform->SetVisible(false);
 				_staticBodies.push_back(newPlatform);
