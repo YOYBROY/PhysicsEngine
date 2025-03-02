@@ -83,6 +83,9 @@
     <ClCompile Include="Polygon.cpp">
       <Filter>Game\PhysicsEngine\PhysicsObjects</Filter>
     </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Game\PhysicsEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GLFWCallbacks.h">
@@ -189,6 +192,9 @@
     </ClInclude>
     <ClInclude Include="Polygon.h">
       <Filter>Game\PhysicsEngine\PhysicsObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Game\PhysicsEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

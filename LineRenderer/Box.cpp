@@ -66,7 +66,6 @@ void Box::Update(float delta)
 void Box::Draw(LineRenderer* lines)
 {
 	Polygon::Draw(lines);
-	TextStream output(lines, _position - Vec2(0.8, 0.45), 0.5f, Colour::SHREKGREEN);
-
-	output << "DVD ";
+	//TextStream output(lines, _position - Vec2(0.8, 0.45), 0.5f, Colour::SHREKGREEN);
+	//output << "DVD ";
 }

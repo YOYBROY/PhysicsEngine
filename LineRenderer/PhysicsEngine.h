@@ -10,7 +10,8 @@ class PhysicsEngine : public Application
 {
 public:
 	PhysicsEngine();
-	std::vector<PhysicsObject*> _physicsObjects;
+	std::vector<PhysicsObject*> _dynamicBodies;
+	std::vector<PhysicsObject*> _staticBodies;
 	
 	Vec2 _gravity;
 

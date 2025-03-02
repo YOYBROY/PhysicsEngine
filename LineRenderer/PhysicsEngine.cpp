@@ -6,6 +6,7 @@
 #include "Box.h"
 #include "Plane.h"
 #include "Polygon.h"
+#include "Grid.h"
 
 PhysicsEngine::PhysicsEngine()
 {
@@ -16,20 +17,37 @@ PhysicsEngine::PhysicsEngine()
 void PhysicsEngine::Initialise()
 {
 	PopulateCollisionFunctionArray();
-	//_physicsObjects.push_back(new Polygon(Vec2(3, 5), 4, 2, 4, 1, 20));
+
+
+	Grid level;
+	level.LoadFromImage("Level1.png");
+
+	_dynamicBodies.push_back(new Polygon(Vec2(3, 5), 4, 1, 4, 1, 20, Vec2(10,0.3)));
+
+	for (int y = 0; y < level.GetHeight(); y++)
+	{
+		for (int x = 0; x < level.GetWidth(); x++)
+		{
+			if (level.At(x, y) == TileType::PLATFORM)
+			{
+				_staticBodies.push_back(new Box(Vec2(x + 0.5f, -y + level.GetHeight() -0.5f), 1, 1, 0, 1));
+			}
+		}
+	}
+
 	//Create Newtons Cradle
-	_physicsObjects.push_back(new Circle(Vec2(-3, 6), 2, 0, 0.9f));
-	_physicsObjects.push_back(new Circle(Vec2(2, 0), 0.3f, 1, 0.9f, Vec2(0, 2)));
-	_physicsObjects.push_back(new Circle(Vec2(1, 0), 0.3f, 1, 0.9f, Vec2(0, 2)));
-	_physicsObjects.push_back(new Circle(Vec2(0, 0), 0.3f, 1, 0.9f, Vec2(0, 2))); //Asymmetrical Cradle with inconsistent mass
-	_physicsObjects.push_back(new Circle(Vec2(-1, 0), 0.3f, 1, 0.9f, Vec2(0, 2)));
-	_physicsObjects.push_back(new Circle(Vec2(-2, 0), 0.3f, 1, 0.9f, Vec2(0, 2)));
-	_physicsObjects.push_back(new Circle(Vec2(-3, 0), 0.3f, 1, 0.9f, Vec2(0, 2)));
+	//_physicsObjects.push_back(new Circle(Vec2(-3, 6), 2, 0, 0.9f));
+	//_physicsObjects.push_back(new Circle(Vec2(2, 0), 0.3f, 1, 0.9f, Vec2(0, 2)));
+	//_physicsObjects.push_back(new Circle(Vec2(1, 0), 0.3f, 1, 0.9f, Vec2(0, 2)));
+	//_physicsObjects.push_back(new Circle(Vec2(0, 0), 0.3f, 1, 0.9f, Vec2(0, 2))); //Asymmetrical Cradle with inconsistent mass
+	//_physicsObjects.push_back(new Circle(Vec2(-1, 0), 0.3f, 1, 0.9f, Vec2(0, 2)));
+	//_physicsObjects.push_back(new Circle(Vec2(-2, 0), 0.3f, 1, 0.9f, Vec2(0, 2)));
+	//_physicsObjects.push_back(new Circle(Vec2(-3, 0), 0.3f, 1, 0.9f, Vec2(0, 2)));
 	
 	//Create Box
-	_physicsObjects.push_back(new Box(Vec2(1.6, 0.9), 1.6f, 0.9f, 1, 1, Vec2(-1.6f, -0.9f)));
-	_physicsObjects.push_back(new Box(Vec2(-0.9*8, 1.6*4.5), 1.6f, 0.9f, 1, 1, Vec2(1.6f, -0.9f)));
-	_physicsObjects.push_back(new Box(Vec2(6, 1.5), 3, 3, 0, 1));
+	//_physicsObjects.push_back(new Box(Vec2(1.6, 0.9), 1.6f, 0.9f, 1, 1, Vec2(-1.6f, -0.9f)));
+	//_physicsObjects.push_back(new Box(Vec2(-0.9*8, 1.6*4.5), 1.6f, 0.9f, 1, 1, Vec2(1.6f, -0.9f)));
+	//_physicsObjects.push_back(new Box(Vec2(6, 1.5), 3, 3, 0, 1));
 	//_physicsObjects.push_back(new Box(Vec2(0, -4), 3, 2, 1, 1, Vec2(0, 0)));
 	//_physicsObjects.push_back(new Polygon(Vec2(3, -5), 8, 2, 4, 1, 360/16));
 	
@@ -44,10 +62,10 @@ void PhysicsEngine::Initialise()
 	//_physicsObjects.push_back(new Polygon(Vec2(2, 8), 4, 1.0f, 1, 1, Vec2(1.2,10)));
 
 	//Create Off axis box
-	_physicsObjects.push_back(new Plane(Vec2(0.5f, 0.5), -10));
-	_physicsObjects.push_back(new Plane(Vec2(-0.5f, -0.5), -10));
-	_physicsObjects.push_back(new Plane(Vec2(0.5, -0.5), -10));
-	_physicsObjects.push_back(new Plane(Vec2(-0.5, 0.5), -10));
+	//_physicsObjects.push_back(new Plane(Vec2(0.5f, 0.5), -10));
+	//_physicsObjects.push_back(new Plane(Vec2(-0.5f, -0.5), -10));
+	//_physicsObjects.push_back(new Plane(Vec2(0.5, -0.5), -10));
+	//_physicsObjects.push_back(new Plane(Vec2(-0.5, 0.5), -10));
 }
 
 void PhysicsEngine::Update(float delta)
@@ -55,26 +73,41 @@ void PhysicsEngine::Update(float delta)
 	//_physicsObjects[1]->SetPosition(cursorPos);
 
 	//Update Objects
-	for (PhysicsObject* objects : _physicsObjects)
+	for (PhysicsObject* objects : _dynamicBodies)
 	{
 		objects->Update(delta);
 	}
-	for (int i = 0; i < _physicsObjects.size() - 1; i++)
+	for (int i = 0; i < _dynamicBodies.size() - 1; i++)
 	{
-		for (int j = i + 1; j < _physicsObjects.size(); j++)
+		for (int j = i + 1; j < _dynamicBodies.size(); j++)
 		{
-			CollisionInfo collisionInfo = CheckCollision(_physicsObjects[i], _physicsObjects[j]);
+			CollisionInfo collisionInfo = CheckCollision(_dynamicBodies[i], _dynamicBodies[j]);
 			if (collisionInfo.objA == nullptr || collisionInfo.objB == nullptr) continue;
-
-			//lines->DrawLineWithArrow(Vec2(), collisionInfo._overlapNormal);
-
 			if (collisionInfo._overlapping)
 			{
 				collisionInfo.Resolve();
 			}
 		}
 	}
-	for (PhysicsObject* objects : _physicsObjects)
+
+	for (int i = 0; i < _staticBodies.size() - 1; i++)
+	{
+		for (int j = 0; j < _dynamicBodies.size(); j++)
+		{
+			CollisionInfo collisionInfo = CheckCollision(_staticBodies[i], _dynamicBodies[j]);
+			if (collisionInfo.objA == nullptr || collisionInfo.objB == nullptr) continue;
+			if (collisionInfo._overlapping)
+			{
+				collisionInfo.Resolve();
+			}
+		}
+	}
+
+	for (PhysicsObject* objects : _staticBodies)
+	{
+		objects->Draw(lines);
+	}
+	for (PhysicsObject* objects : _dynamicBodies)
 	{
 		objects->Draw(lines);
 	}
