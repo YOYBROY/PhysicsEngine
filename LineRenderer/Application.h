@@ -39,7 +39,7 @@ public:
 	void MoveCameraScaled(Vec2 movement) { cameraCentre += movement * cameraHeight; }
 
 protected:
-	float cameraHeight = 10.0f;
+	float cameraHeight = 14.0f;
 	Vec2 cameraCentre = { 0.0f, 0.0f };
 	AppInfo appInfo;
 };

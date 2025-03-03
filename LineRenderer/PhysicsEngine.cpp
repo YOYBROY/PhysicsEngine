@@ -14,6 +14,18 @@ PhysicsEngine::PhysicsEngine()
 	appInfo.appName = "Physics Engine";
 }
 
+PhysicsEngine::~PhysicsEngine()
+{
+	for (PhysicsObject* thisBody : _dynamicBodies)
+	{
+		delete thisBody;
+	}
+	for (PhysicsObject* thisBody : _staticBodies)
+	{
+		delete thisBody;
+	}
+}
+
 void PhysicsEngine::Initialise()
 {
 	PopulateCollisionFunctionArray();
@@ -22,7 +34,7 @@ void PhysicsEngine::Initialise()
 	Grid level;
 	level.LoadFromImage("Level1.png");
 
-	_dynamicBodies.push_back(new Box(Vec2(3, 5), 1, 2, 1, 0));
+	_dynamicBodies.push_back(new Box(Vec2(3, 5), 0.7f, 1, 1, 0));
 
 	Vec2 runningPos;
 	int runningCount = 0;

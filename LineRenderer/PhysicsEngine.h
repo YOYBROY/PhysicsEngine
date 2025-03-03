@@ -10,6 +10,7 @@ class PhysicsEngine : public Application
 {
 public:
 	PhysicsEngine();
+	~PhysicsEngine();
 	std::vector<PhysicsObject*> _dynamicBodies;
 	std::vector<PhysicsObject*> _staticBodies;
 	

@@ -7,13 +7,14 @@ enum class TileType
 {
 	EMPTY = 0xFFFFFF,
 	PLATFORM = 0x000000,
+	PLAYERSTART = 0xFF0000
 };
 
 class Grid
 {
 	TileType* data = nullptr;
-	int width;
-	int height;
+	int width = 0;
+	int height = 0;
 
 public:
 	Grid() = default;

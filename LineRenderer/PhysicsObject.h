@@ -23,10 +23,11 @@ protected:
 	float _elasticity;
 	Colour _colour;
 	Vec2 _forceAccumulator;
-	Vec2 _gravity = Vec2(0,-9.8f);
+	Vec2 _gravity = Vec2(0,-9.8);
 
 public:
 	PhysicsObject();
+	virtual ~PhysicsObject() = default;
 	PhysicsObject(Vec2 position, float mass, float elasticity);
 	PhysicsObject(Vec2 position, float mass, float elasticity, Vec2 velocity);
 	virtual void Update(float delta);

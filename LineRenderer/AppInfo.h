@@ -6,7 +6,7 @@
 //up, in case it gets set to true later.
 struct GridInfo
 {
-	bool show = true;
+	bool show = false;
 	Colour mainAxesColour = Colour::WHITE.Multiply(0.8f);	//The colour of the cardinal axes lines
 	Colour linesColour = Colour::WHITE.Multiply(0.3f);	//The colour of the more faded spacing lines.
 	unsigned int extent = 10;	//How many grid lines there are in all four directions (positive and negative).
@@ -31,8 +31,8 @@ struct CameraControls
 struct AppInfo
 {
 	const char* appName = "Line Renderer";
-	unsigned int horizontalResolution = 1280;
-	unsigned int verticalResolution = 720;
+	unsigned int horizontalResolution = 1920;
+	unsigned int verticalResolution = 1080;
 	float lineWidth = 3.0f;
 	Colour backgroundColour = Colour::BLACK;
 	unsigned int fixedFramerate = 60;

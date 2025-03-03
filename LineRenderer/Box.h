@@ -30,7 +30,7 @@ protected:
 	float _width;
 	float _height;
 	bool _visible = true;
-	BoxType _boxType;
+	BoxType _boxType = BoxType::URDL;
 public:
 	Box(Vec2 position, float width, float height, float mass, float elasticity);
 	Box(Vec2 position, float width, float height, float mass, float elasticity, Vec2 velocity);
