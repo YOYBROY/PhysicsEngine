@@ -86,6 +86,9 @@
     <ClCompile Include="Grid.cpp">
       <Filter>Game\PhysicsEngine</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game\PhysicsEngine\PhysicsObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GLFWCallbacks.h">
@@ -195,6 +198,9 @@
     </ClInclude>
     <ClInclude Include="Grid.h">
       <Filter>Game\PhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Game\PhysicsEngine\PhysicsObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

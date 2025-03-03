@@ -5,7 +5,6 @@ class Circle : public PhysicsObject
 {
 private:
 	float _radius;
-	ObjectType _objectType = CIRCLE;
 
 public:
 	Circle(Vec2 position, float radius, float mass, float elasticity);
@@ -15,5 +14,5 @@ public:
 	float GetRadius() { return _radius; }
 	void SetRadius(float radius) { _radius = radius; }
 
-	ObjectType GetObjectType() override { return _objectType; }
+	ObjectType GetObjectType() override { return ObjectType::CIRCLE; }
 };

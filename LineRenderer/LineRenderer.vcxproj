@@ -172,6 +172,7 @@
     <ClCompile Include="PhysicsEngine.cpp" />
     <ClCompile Include="PhysicsObject.cpp" />
     <ClCompile Include="Plane.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Polygon.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="ApplicationHarness.cpp" />
@@ -211,6 +212,7 @@
     <ClInclude Include="PhysicsEngine.h" />
     <ClInclude Include="PhysicsObject.h" />
     <ClInclude Include="Plane.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Polygon.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="ApplicationHarness.h" />

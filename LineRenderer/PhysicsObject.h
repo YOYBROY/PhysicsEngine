@@ -9,6 +9,7 @@ enum ObjectType
 	BOX,
 	PLANE,
 	POLYGON,
+	PLAYER,
 
 	COUNT
 };

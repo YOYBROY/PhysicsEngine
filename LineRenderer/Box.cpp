@@ -71,100 +71,100 @@ void Box::Draw(LineRenderer* lines)
 	switch (_boxType)
 	{
 	case BoxType::U:
-		lines->AddPointToLine(_vertices[0] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[1] + _position, Colour::SHREKGREEN);
+		lines->AddPointToLine(_vertices[0] + _position, _colour);
+		lines->AddPointToLine(_vertices[1] + _position, _colour);
 		lines->FinishLineStrip();
 		break;
 	case BoxType::R:
-		lines->AddPointToLine(_vertices[1] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[2] + _position, Colour::SHREKGREEN);
+		lines->AddPointToLine(_vertices[1] + _position,  _colour);
+		lines->AddPointToLine(_vertices[2] + _position,  _colour);
 		lines->FinishLineStrip();
 		break;
 	case BoxType::D:
-		lines->AddPointToLine(_vertices[2] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[3] + _position, Colour::SHREKGREEN);
+		lines->AddPointToLine(_vertices[2] + _position,  _colour);
+		lines->AddPointToLine(_vertices[3] + _position,  _colour);
 		lines->FinishLineStrip();
 		break;
 	case BoxType::L:
-		lines->AddPointToLine(_vertices[3] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[0] + _position, Colour::SHREKGREEN);
+		lines->AddPointToLine(_vertices[3] + _position,  _colour);
+		lines->AddPointToLine(_vertices[0] + _position,  _colour);
 		lines->FinishLineStrip();
 		break;
 	case BoxType::UR:
-		lines->AddPointToLine(_vertices[0] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[1] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[2] + _position, Colour::SHREKGREEN);
+		lines->AddPointToLine(_vertices[0] + _position,  _colour);
+		lines->AddPointToLine(_vertices[1] + _position,  _colour);
+		lines->AddPointToLine(_vertices[2] + _position,  _colour);
 		lines->FinishLineStrip();
 		break;
 	case BoxType::UD:
-		lines->AddPointToLine(_vertices[0] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[1] + _position, Colour::SHREKGREEN);
+		lines->AddPointToLine(_vertices[0] + _position,  _colour);
+		lines->AddPointToLine(_vertices[1] + _position,  _colour);
 		lines->FinishLineStrip();
 
-		lines->AddPointToLine(_vertices[2] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[3] + _position, Colour::SHREKGREEN);
+		lines->AddPointToLine(_vertices[2] + _position,  _colour);
+		lines->AddPointToLine(_vertices[3] + _position,  _colour);
 		lines->FinishLineStrip();
 		break;
 	case BoxType::UL:
-		lines->AddPointToLine(_vertices[3] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[0] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[1] + _position, Colour::SHREKGREEN);
+		lines->AddPointToLine(_vertices[3] + _position,  _colour);
+		lines->AddPointToLine(_vertices[0] + _position,  _colour);
+		lines->AddPointToLine(_vertices[1] + _position,  _colour);
 		lines->FinishLineStrip();
 		break;
 	case BoxType::RD:
-		lines->AddPointToLine(_vertices[1] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[2] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[3] + _position, Colour::SHREKGREEN);
+		lines->AddPointToLine(_vertices[1] + _position,  _colour);
+		lines->AddPointToLine(_vertices[2] + _position,  _colour);
+		lines->AddPointToLine(_vertices[3] + _position,  _colour);
 		lines->FinishLineStrip();
 		break;
 	case BoxType::RL:
-		lines->AddPointToLine(_vertices[1] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[2] + _position, Colour::SHREKGREEN);
+		lines->AddPointToLine(_vertices[1] + _position,  _colour);
+		lines->AddPointToLine(_vertices[2] + _position,  _colour);
 		lines->FinishLineStrip();
 
-		lines->AddPointToLine(_vertices[3] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[0] + _position, Colour::SHREKGREEN);
+		lines->AddPointToLine(_vertices[3] + _position,  _colour);
+		lines->AddPointToLine(_vertices[0] + _position,  _colour);
 		lines->FinishLineStrip();
 		break;
 	case BoxType::DL:
-		lines->AddPointToLine(_vertices[2] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[3] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[0] + _position, Colour::SHREKGREEN);
+		lines->AddPointToLine(_vertices[2] + _position,  _colour);
+		lines->AddPointToLine(_vertices[3] + _position,  _colour);
+		lines->AddPointToLine(_vertices[0] + _position,  _colour);
 		lines->FinishLineStrip();
 		break;
 	case BoxType::URD:
-		lines->AddPointToLine(_vertices[0] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[1] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[2] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[3] + _position, Colour::SHREKGREEN);
+		lines->AddPointToLine(_vertices[0] + _position, _colour);
+		lines->AddPointToLine(_vertices[1] + _position, _colour);
+		lines->AddPointToLine(_vertices[2] + _position, _colour);
+		lines->AddPointToLine(_vertices[3] + _position, _colour);
 		lines->FinishLineStrip();
 		break;
 	case BoxType::RDL:
-		lines->AddPointToLine(_vertices[1] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[2] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[3] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[0] + _position, Colour::SHREKGREEN);
+		lines->AddPointToLine(_vertices[1] + _position,  _colour);
+		lines->AddPointToLine(_vertices[2] + _position,  _colour);
+		lines->AddPointToLine(_vertices[3] + _position,  _colour);
+		lines->AddPointToLine(_vertices[0] + _position,  _colour);
 		lines->FinishLineStrip();
 		break;
 	case BoxType::DLU:
-		lines->AddPointToLine(_vertices[2] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[3] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[0] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[1] + _position, Colour::SHREKGREEN);
+		lines->AddPointToLine(_vertices[2] + _position,  _colour);
+		lines->AddPointToLine(_vertices[3] + _position,  _colour);
+		lines->AddPointToLine(_vertices[0] + _position,  _colour);
+		lines->AddPointToLine(_vertices[1] + _position,  _colour);
 		lines->FinishLineStrip();
 		break;
 	case BoxType::LUR:
-		lines->AddPointToLine(_vertices[3] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[0] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[1] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[2] + _position, Colour::SHREKGREEN);
+		lines->AddPointToLine(_vertices[3] + _position,  _colour);
+		lines->AddPointToLine(_vertices[0] + _position,  _colour);
+		lines->AddPointToLine(_vertices[1] + _position,  _colour);
+		lines->AddPointToLine(_vertices[2] + _position,  _colour);
 		lines->FinishLineStrip();
 		break;
 	case BoxType::URDL:
-		lines->AddPointToLine(_vertices[0] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[1] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[2] + _position, Colour::SHREKGREEN);
-		lines->AddPointToLine(_vertices[3] + _position, Colour::SHREKGREEN);
+		lines->AddPointToLine(_vertices[0] + _position, _colour);
+		lines->AddPointToLine(_vertices[1] + _position, _colour);
+		lines->AddPointToLine(_vertices[2] + _position, _colour);
+		lines->AddPointToLine(_vertices[3] + _position, _colour);
 		lines->FinishLineLoop();
 		break;
 	default:

@@ -21,3 +21,10 @@ CollisionInfo PlaneToPolygon(PhysicsObject* objA, PhysicsObject* objB);
 CollisionInfo PolygonToCircle(PhysicsObject* objA, PhysicsObject* objB);
 CollisionInfo PolygonToPlane(PhysicsObject* objA, PhysicsObject* objB);
 CollisionInfo PolygonToPolygon(PhysicsObject* objA, PhysicsObject* objB);
+CollisionInfo PolygonToPlayer(PhysicsObject* objA, PhysicsObject* objB);
+
+
+//CollisionInfo PlayerToCircle(PhysicsObject* objA, PhysicsObject* objB);
+//CollisionInfo PlayerToPlane(PhysicsObject* objA, PhysicsObject* objB);
+CollisionInfo PlayerToPolygon(PhysicsObject* objA, PhysicsObject* objB);
+//CollisionInfo PlayerToCharacter(PhysicsObject* objA, PhysicsObject* objB);
