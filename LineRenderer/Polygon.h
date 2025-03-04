@@ -11,7 +11,6 @@ protected:
 	std::vector<Vec2> _normals; //Should be Updated each frame if rotation exists, need to be updated with World Space Vertice points
 	std::vector<Vec2> _edgeCentres;
 
-
 public:
 	Polygon(Vec2 position, int vertCount, float padding, float mass, float elasticity);
 	Polygon(Vec2 position, int vertCount, float padding, float mass, float elasticity, float orientation);

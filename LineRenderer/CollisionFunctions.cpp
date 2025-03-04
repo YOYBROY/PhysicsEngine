@@ -270,44 +270,44 @@ CollisionInfo PolygonToPlayer(PhysicsObject* objA, PhysicsObject* objB)
 	{
 		projectionNormals.push_back(aNormal);
 	}
-	for (Vec2 bNormal : playerB->GetNormals())
-	{
-		projectionNormals.push_back(bNormal);
-	}
 	//Get all the vertices to project
 	std::vector<Vec2> polyAVerts = polyA->GetWorldSpaceVertices();
-	std::vector<Vec2> polyBVerts = playerB->GetWorldSpaceVertices();
+	std::vector<Vec2> playerBVerts = playerB->GetWorldSpaceVertices();
 
 	float smallestOverlap = FLT_MAX;
 	int smallestOverlapNormalIndex = 0;
 
 	Vec2 displacement = polyA->GetPosition() - playerB->GetPosition();
 
+	float overlapDepths[4];
+
 	//Project all the vertices on to every normal
 	//Find the min and max distances for each polygon
 	for (int i = 0; i < projectionNormals.size(); i++)
 	{
-		if (Dot(displacement.Normalise(), projectionNormals[i]) < 0) continue;
+		//if (Dot(displacement.Normalise(), projectionNormals[i]) < 0) continue;
 		float polyAMin = FLT_MAX;
 		float polyAMax = -FLT_MAX;
-		float polyBMin = FLT_MAX;
-		float polyBMax = -FLT_MAX;
+		float playerBMin = FLT_MAX;
+		float playerBMax = -FLT_MAX;
+
 		for (int j = 0; j < polyAVerts.size(); j++)
 		{
 			float projectionLength = Dot(polyAVerts[j], projectionNormals[i]);
 			polyAMax = projectionLength > polyAMax ? projectionLength : polyAMax;
 			polyAMin = projectionLength < polyAMin ? projectionLength : polyAMin;
 		}
-		for (int j = 0; j < polyBVerts.size(); j++)
+		for (int j = 0; j < playerBVerts.size(); j++)
 		{
-			float projectionLength = Dot(polyBVerts[j], projectionNormals[i]);
-			polyBMax = projectionLength > polyBMax ? projectionLength : polyBMax;
-			polyBMin = projectionLength < polyBMin ? projectionLength : polyBMin;
+			float projectionLength = Dot(playerBVerts[j], projectionNormals[i]);
+			playerBMax = projectionLength > playerBMax ? projectionLength : playerBMax;
+			playerBMin = projectionLength < playerBMin ? projectionLength : playerBMin;
 		}
-
-		float overlap1 = polyAMax - polyBMin;
-		float overlap2 = polyBMax - polyAMin;
+		//the hint lies with which one of these is overlapping!!
+		float overlap1 = polyAMax - playerBMin;
+		float overlap2 = playerBMax - polyAMin;
 		float localSmallestOverlap = overlap1 < overlap2 ? overlap1 : overlap2;
+		overlapDepths[i] = localSmallestOverlap;
 
 		if (localSmallestOverlap < smallestOverlap)
 		{
@@ -316,9 +316,14 @@ CollisionInfo PolygonToPlayer(PhysicsObject* objA, PhysicsObject* objB)
 		}
 	}
 
+	if (smallestOverlap < 0)
+	{
+		return CollisionInfo();
+	}
+
 	collInfo.objA = polyA;
 	collInfo.objB = playerB;
-	collInfo._overlapNormal = projectionNormals[smallestOverlapNormalIndex];
+	collInfo._overlapNormal = Vec2(0, -1); //projectionNormals[smallestOverlapNormalIndex];
 	collInfo._overlapAmount = smallestOverlap;
 	collInfo._overlapping = collInfo._overlapAmount > 0;
 	return collInfo;

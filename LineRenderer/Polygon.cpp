@@ -41,6 +41,7 @@ Polygon::Polygon(Vec2 position, int vertCount, float padding, float mass, float 
 		_edgeCentres.push_back((_vertices[i] + next) * 0.5f);
 	}
 }
+
 //with Velocity
 Polygon::Polygon(Vec2 position, int vertCount, float padding, float mass, float elasticity, Vec2 velocity) : Polygon(position, vertCount, padding, mass, elasticity)
 {

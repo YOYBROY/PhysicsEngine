@@ -6,6 +6,9 @@
 
 Player::Player(Vec2 position, float width, float height, float mass, float elasticity) : Polygon(position, mass, elasticity), _width(width), _height(height)
 {
+	maxStepHeight = _height * 2 * maxStepFraction;
+	edgeSlip = _width * 2 * edgeSlipFraction;
+
 	float _maxX = +width * 0.5f;
 	float _minX = -width * 0.5f;
 	float _maxY = +height * 0.5f;
@@ -29,6 +32,9 @@ Player::Player(Vec2 position, float width, float height, float mass, float elast
 
 Player::Player(Vec2 position, float width, float height, float mass, float elasticity, float orientation) : Polygon(position, mass, elasticity), _width(width), _height(height)
 {
+	maxStepHeight = _height * 2 * maxStepFraction;
+	edgeSlip = _width * 2 * edgeSlipFraction;
+
 	float _maxX = +width * 0.5f;
 	float _minX = -width * 0.5f;
 	float _maxY = +height * 0.5f;
@@ -67,8 +73,6 @@ void Player::Update(float delta)
 
 void Player::Draw(LineRenderer* lines)
 {
-	//Polygon::Draw(lines);
-
 	Colour playerColour = grounded ? Colour::GREEN : Colour::RED;
 
 	for (Vec2 vertice : _vertices)

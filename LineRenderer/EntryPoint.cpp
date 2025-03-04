@@ -4,10 +4,11 @@
 #include "PhysicsEngine.h"
 #include "Example.h"
 #include "DotClicker.h"
+#include "Platformer.h"
 
 int main()
 {
-	ApplicationHarness program(new PhysicsEngine());	//Create a new instance of your application type to pass into the harness here.
+	ApplicationHarness program(new Platformer());	//Create a new instance of your application type to pass into the harness here.
 
 	program.Run();
 

@@ -29,7 +29,7 @@ class Box : public Polygon
 protected:
 	float _width;
 	float _height;
-	bool _visible = true;
+	bool _visible = false;
 	BoxType _boxType = BoxType::URDL;
 public:
 	Box(Vec2 position, float width, float height, float mass, float elasticity);

@@ -7,12 +7,11 @@
 #include "Box.h"
 #include "Plane.h"
 #include "Polygon.h"
-#include "Grid.h"
 
 PhysicsEngine::PhysicsEngine()
 {
 	//appInfo.fixedFramerate = 1;
-	appInfo.appName = "Platformer";
+	appInfo.appName = "Physics Engine";
 }
 
 PhysicsEngine::~PhysicsEngine()
@@ -31,87 +30,18 @@ void PhysicsEngine::Initialise()
 {
 	PopulateCollisionFunctionArray();
 
-	Grid level;
-	level.LoadFromImage("Level2.png");
+	_dynamicBodies.push_back(new Polygon(Vec2(1, 1), 4, 1, 1, 1, 50));
+	_staticBodies.push_back(new Polygon(Vec2(6, 2), 4, 1, 0, 1, 30));
 
-	Vec2 runningPos;
-	int runningCount = 0;
-	Vec2 playerStart;
-
-	for (int y = 0; y < level.GetHeight(); y++)
-	{
-		for (int x = 0; x < level.GetWidth(); x++)
-		{
-			if (level.At(x, y) == TileType::PLATFORM)
-			{
-				int runningBoxType = 0;
-				//left
-				if (x == 0)
-				{
-					runningBoxType += 13;
-				}
-				else if (level.At(x - 1, y) != TileType::PLATFORM)
-				{
-					runningBoxType += 13;
-				}
-				//right
-				if (x == level.GetWidth() - 1)
-				{
-					runningBoxType += 7;
-				}
-				else if (level.At(x + 1, y) != TileType::PLATFORM)
-				{
-					runningBoxType += 7;
-				}
-				//up
-				if (y == 0)
-				{
-					runningBoxType += 3;
-				}
-				else if (level.At(x, y - 1) != TileType::PLATFORM)
-				{
-					runningBoxType += 3;
-				}
-				//down
-				if (y == level.GetHeight() - 1)
-				{
-					runningBoxType += 11;
-				}
-				else if (level.At(x, y + 1) != TileType::PLATFORM)
-				{
-					runningBoxType += (int)BoxType::D;
-				}
-
-				Box* newPlatform = new Box(Vec2(x + 0.5f, level.GetHeight() - y - 0.5f), 1, 1, 0, 1);
-				newPlatform->SetBoxType(runningBoxType);
-				_staticBodies.push_back(newPlatform);
-				continue;
-			}
-			else if (level.At(x, y) == TileType::PLAYERSTART)
-			{
-				playerStart = Vec2(x + 0.5f, level.GetHeight() - y - 0.5f);
-			}
-		}
-	}
-
-	player = new Player(playerStart, 0.7f, 1, 1, 0);
-	player->SetColour(Colour::BLUE);
-	ObjectType type = player->GetObjectType();
-	_dynamicBodies.push_back(player);
+	_staticBodies.push_back(new Plane(Vec2(0, 1), -5));
 }
 
 void PhysicsEngine::Update(float delta)
 {
-	cameraCentre = player->GetPosition();
-
-	player->HandleInput();
-	player->grounded = false;
-
 	for (PhysicsObject* objects : _dynamicBodies)
 	{
 		objects->Update(delta);
 	}
-
 
 	for (int i = 0; i < _dynamicBodies.size() - 1; i++)
 	{
@@ -126,7 +56,7 @@ void PhysicsEngine::Update(float delta)
 		}
 	}
 
-	for (int i = 0; i < _staticBodies.size() - 1; i++)
+	for (int i = 0; i < _staticBodies.size(); i++)
 	{
 		for (int j = 0; j < _dynamicBodies.size(); j++)
 		{
@@ -146,13 +76,5 @@ void PhysicsEngine::Update(float delta)
 	for (PhysicsObject* objects : _dynamicBodies)
 	{
 		objects->Draw(lines);
-	}
-}
-
-void PhysicsEngine::OnKeyPress(Key key)
-{
-	if (key == Key::Space)
-	{
-		player->AttemptJump();
 	}
 }

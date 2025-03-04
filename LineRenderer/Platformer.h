@@ -5,9 +5,9 @@
 
 #include <vector>
 
-class PhysicsObject;
+class Platformer;
 
-class PhysicsEngine : public Application
+class Platformer : public Application
 {
 private:
 	std::vector<PhysicsObject*> _dynamicBodies;
@@ -16,11 +16,13 @@ private:
 	Player* player = nullptr;
 
 public:
-	PhysicsEngine();
-	~PhysicsEngine();
-	
+	Platformer();
+	~Platformer();
+
 	Vec2 _gravity;
 
 	void Initialise() override;
 	void Update(float delta) override;
+
+	void OnKeyPress(Key key) override;
 };

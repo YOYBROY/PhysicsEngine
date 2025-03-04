@@ -59,9 +59,6 @@
     <ClCompile Include="TextStream.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsEngine.cpp">
-      <Filter>Game\PhysicsEngine</Filter>
-    </ClCompile>
     <ClCompile Include="CollisionFunctions.cpp">
       <Filter>Game\PhysicsEngine</Filter>
     </ClCompile>
@@ -88,6 +85,12 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Game\PhysicsEngine\PhysicsObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Platformer.cpp">
+      <Filter>Game\Applications</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine.cpp">
+      <Filter>Game\Applications</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -172,9 +175,6 @@
     <ClInclude Include="Key.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsEngine.h">
-      <Filter>Game\PhysicsEngine</Filter>
-    </ClInclude>
     <ClInclude Include="CollisionFunctions.h">
       <Filter>Game\PhysicsEngine</Filter>
     </ClInclude>
@@ -202,6 +202,12 @@
     <ClInclude Include="Player.h">
       <Filter>Game\PhysicsEngine\PhysicsObjects</Filter>
     </ClInclude>
+    <ClInclude Include="Platformer.h">
+      <Filter>Game\Applications</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine.h">
+      <Filter>Game\Applications</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -227,6 +233,9 @@
     </Filter>
     <Filter Include="Game\PhysicsEngine\PhysicsObjects">
       <UniqueIdentifier>{b5e57474-9759-4a3c-be00-9f2d31eaffe2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Applications">
+      <UniqueIdentifier>{adb56c4f-8db8-490a-940c-d4758c68db24}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
