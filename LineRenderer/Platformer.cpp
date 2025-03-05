@@ -110,10 +110,13 @@ void Platformer::Update(float delta)
 
 	//Player Parameters
 	ImGui::Checkbox("Debug Player", &player->debug);
-	if (ImGui::SliderFloat("Max Step", &player->maxStepHeight, 0.0f, 1.0f));
-	if (ImGui::SliderFloat("Head Slip", &player->headSlip, 0.0f, 1.0f));
-	if (ImGui::SliderFloat("Foot Slip", &player->footSlip, 0.0f, 1.0f));
-	if (ImGui::SliderFloat("Umbrella Angle", &player->umbrellaAngle, 0.0f, 1.0f));
+	if (player->debug)
+	{
+		if (ImGui::SliderFloat("Max Step", &player->maxStepHeight, 0.0f, 1.0f));
+		if (ImGui::SliderFloat("Head Slip", &player->headSlip, 0.0f, 1.0f));
+		if (ImGui::SliderFloat("Foot Slip", &player->footSlip, 0.0f, 1.0f));
+		if (ImGui::SliderFloat("Umbrella Angle", &player->umbrellaAngle, 0.0f, 1.0f));
+	}
 
 	//Camera Options
 	ImGui::Checkbox("Camera To Player", &cameraToPlayer);

@@ -1,5 +1,4 @@
 #include "Box.h"
-
 #include "TextStream.h"
 
 Box::Box(Vec2 position, float width, float height, float mass, float elasticity) : Polygon(position, mass, elasticity), _width(width), _height(height)
@@ -66,7 +65,6 @@ void Box::Update(float delta)
 void Box::Draw(LineRenderer* lines)
 {
 	if (!_visible) _colour = Colour::WHITE;
-	//Polygon::Draw(lines);
 
 	lines->SetColour(_colour);
 

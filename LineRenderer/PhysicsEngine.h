@@ -2,6 +2,7 @@
 
 #include "Application.h"
 #include "Player.h"
+#include "CuttingPolygons.h"
 
 #include <vector>
 
@@ -13,6 +14,8 @@ private:
 	std::vector<PhysicsObject*> _dynamicBodies;
 	std::vector<PhysicsObject*> _staticBodies;
 
+	CuttingPolygons cuttingPolygons;
+
 	Player* player = nullptr;
 
 public:
@@ -23,4 +26,7 @@ public:
 
 	void Initialise() override;
 	void Update(float delta) override;
+
+
+	void OnLeftClick() override;
 };

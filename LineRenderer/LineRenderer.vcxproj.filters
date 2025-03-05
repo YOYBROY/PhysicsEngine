@@ -92,6 +92,7 @@
     <ClCompile Include="PhysicsEngine.cpp">
       <Filter>Game\Applications</Filter>
     </ClCompile>
+    <ClCompile Include="CuttingPolygons.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GLFWCallbacks.h">
@@ -211,6 +212,7 @@
     <ClInclude Include="stb_image.h">
       <Filter>ThirdParty</Filter>
     </ClInclude>
+    <ClInclude Include="CuttingPolygons.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

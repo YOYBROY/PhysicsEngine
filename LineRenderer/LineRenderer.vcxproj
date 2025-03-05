@@ -162,6 +162,7 @@
     <ClCompile Include="CollisionFunctions.cpp" />
     <ClCompile Include="CollisionInfo.cpp" />
     <ClCompile Include="Colour.cpp" />
+    <ClCompile Include="CuttingPolygons.cpp" />
     <ClCompile Include="DotClicker.cpp" />
     <ClCompile Include="EntryPoint.cpp" />
     <ClCompile Include="Example.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="CollisionFunctions.h" />
     <ClInclude Include="CollisionInfo.h" />
     <ClInclude Include="Colour.h" />
+    <ClInclude Include="CuttingPolygons.h" />
     <ClInclude Include="DotClicker.h" />
     <ClInclude Include="Example.h" />
     <ClInclude Include="glad.h" />

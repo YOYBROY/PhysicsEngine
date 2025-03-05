@@ -77,4 +77,10 @@ void PhysicsEngine::Update(float delta)
 	{
 		objects->Draw(lines);
 	}
+	cuttingPolygons.Draw(lines, cursorPos);
+}
+
+void PhysicsEngine::OnLeftClick()
+{
+	cuttingPolygons.TryCut(cursorPos, _dynamicBodies);
 }
