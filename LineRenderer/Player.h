@@ -17,12 +17,19 @@ protected:
 
 	
 public:
+	bool debug = false;
 	bool grounded = true;
 	float maxStepHeight = 0.0f;
 	float maxStepFraction = 0.25f;
 
-	float edgeSlip = 0.0f;
-	float edgeSlipFraction = 0.05f;
+	float headSlip = 0.0f;
+
+	float footSlip = 0.0f;
+	float footSlipFraction = 0.1f;
+
+	bool umbrella = false;
+	float umbrellaAngle = 0.0f;
+	float umbrellaAngleSpeed = 300.0f;
 
 	Player(Vec2 position, float width, float height, float mass, float elasticity);
 	Player(Vec2 position, float width, float height, float mass, float elasticity, Vec2 velocity);
@@ -40,6 +47,6 @@ public:
 
 	ObjectType GetObjectType() override { return ObjectType::PLAYER; }
 
-	void HandleInput();
+	void HandleInput(float delta);
 	void AttemptJump();
 };

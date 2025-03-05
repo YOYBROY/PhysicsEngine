@@ -9,14 +9,14 @@ void CollisionInfo::Resolve()
 
 	if (depenAmount < 0.0f) return;
 
-	if (objA->GetObjectType() == ObjectType::PLAYER)
-	{
-		dynamic_cast<Player*>(objA)->grounded = true;
-	}
-	if (objB->GetObjectType() == ObjectType::PLAYER)
-	{
-		dynamic_cast<Player*>(objB)->grounded = true;
-	}
+	//if (objA->GetObjectType() == ObjectType::PLAYER)
+	//{
+	//	dynamic_cast<Player*>(objA)->grounded = true;
+	//}
+	//if (objB->GetObjectType() == ObjectType::PLAYER)
+	//{
+	//	dynamic_cast<Player*>(objB)->grounded = true;
+	//}
 
 	if (objB->GetMass() <= 0 && objA->GetMass() <= 0) return;
 	if (objB->GetMass() <= 0)

@@ -8,6 +8,7 @@ enum class TileType
 	EMPTY = 0xFFFFFF,
 	PLATFORM = 0x000000,
 	PLAYERSTART = 0xFF0000 //Endianess is backward to most art tools, it goes (Blue, Green, Red)
+
 };
 
 class Grid

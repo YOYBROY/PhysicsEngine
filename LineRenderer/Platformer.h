@@ -16,6 +16,9 @@ private:
 	Player* player = nullptr;
 
 public:
+	bool cameraToPlayer = false;
+	Vec2 cameraPosition = {30, 20};
+	
 	Platformer();
 	~Platformer();
 

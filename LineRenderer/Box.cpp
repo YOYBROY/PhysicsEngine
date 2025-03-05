@@ -65,7 +65,7 @@ void Box::Update(float delta)
 
 void Box::Draw(LineRenderer* lines)
 {
-	if (!_visible) _colour = Colour::ORANGE;
+	if (!_visible) _colour = Colour::WHITE;
 	//Polygon::Draw(lines);
 
 	lines->SetColour(_colour);

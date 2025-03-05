@@ -14,7 +14,9 @@ Platformer::Platformer()
 {
 	//appInfo.fixedFramerate = 1;
 	appInfo.appName = "Platformer";
-	cameraHeight = 14.0f;
+	cameraHeight = 41.0f;
+	appInfo.grid.show = false;
+	appInfo.grid.extent = 100;
 }
 
 Platformer::~Platformer()
@@ -50,7 +52,7 @@ void Platformer::Initialise()
 				//left
 				if (x == 0)
 				{
-					runningBoxType += 13;
+					//runningBoxType += 13;
 				}
 				else if (level.At(x - 1, y) != TileType::PLATFORM)
 				{
@@ -59,7 +61,7 @@ void Platformer::Initialise()
 				//right
 				if (x == level.GetWidth() - 1)
 				{
-					runningBoxType += 7;
+					//runningBoxType += 7;
 				}
 				else if (level.At(x + 1, y) != TileType::PLATFORM)
 				{
@@ -68,7 +70,7 @@ void Platformer::Initialise()
 				//up
 				if (y == 0)
 				{
-					runningBoxType += 3;
+					//runningBoxType += 3;
 				}
 				else if (level.At(x, y - 1) != TileType::PLATFORM)
 				{
@@ -77,14 +79,14 @@ void Platformer::Initialise()
 				//down
 				if (y == level.GetHeight() - 1)
 				{
-					runningBoxType += 11;
+					//runningBoxType += 11;
 				}
 				else if (level.At(x, y + 1) != TileType::PLATFORM)
 				{
 					runningBoxType += (int)BoxType::D;
 				}
 
-				Box* newPlatform = new Box(Vec2(x + 0.5f, level.GetHeight() - y - 0.5f), 1, 1, 0, 1);
+				Box* newPlatform = new Box(Vec2(x + 0.5f, level.GetHeight() - y - 0.5f), 1.6f, 1, 0, 1);
 				newPlatform->SetBoxType(runningBoxType);
 				_staticBodies.push_back(newPlatform);
 				continue;
@@ -106,20 +108,45 @@ void Platformer::Update(float delta)
 {
 	ImGui::Begin("Debug Window");
 
+	//Player Parameters
+	ImGui::Checkbox("Debug Player", &player->debug);
+	if (ImGui::SliderFloat("Max Step", &player->maxStepHeight, 0.0f, 1.0f));
+	if (ImGui::SliderFloat("Head Slip", &player->headSlip, 0.0f, 1.0f));
+	if (ImGui::SliderFloat("Foot Slip", &player->footSlip, 0.0f, 1.0f));
+	if (ImGui::SliderFloat("Umbrella Angle", &player->umbrellaAngle, 0.0f, 1.0f));
+
+	//Camera Options
+	ImGui::Checkbox("Camera To Player", &cameraToPlayer);
 	if (ImGui::SliderFloat("Camera Height", &cameraHeight, 5.0f, 60.0f));
+	if (ImGui::SliderFloat("Camera Pos X", &cameraPosition.x, -60.0f, 60.0f));
+	if (ImGui::SliderFloat("Camera Pos Y", &cameraPosition.y, -60.0f, 60.0f));
 
 	ImGui::End();
-
-
-	player->HandleInput();
-	player->grounded = false;
 
 	for (PhysicsObject* objects : _dynamicBodies)
 	{
 		objects->Update(delta);
 	}
+	
+	player->HandleInput(delta);
 
-	cameraCentre = player->GetPosition();
+	//Umbrella Mechanic
+	if (!player->grounded && player->umbrella)
+	{
+		Vec2 umbrellaDirection = Vec2(0, 1).GetNormalised().RotateBy(DegToRad(player->umbrellaAngle));
+		Vec2 velocityAgainstUmbrella = Dot(player->GetVelocity(), umbrellaDirection) * umbrellaDirection;
+
+		if (Dot(player->GetVelocity().GetNormalised(), Vec2(0, 1)) < 0.5f)
+		{
+			player->AddForce(velocityAgainstUmbrella * -8);
+		}
+
+		lines->DrawLineSegment(player->GetPosition() + Vec2(0,1) + (umbrellaDirection.GetRotatedBy90() * 0.5f), player->GetPosition() + Vec2(0, 1) - (umbrellaDirection.GetRotatedBy90() * 0.5f));
+	}
+
+	player->grounded = false;
+
+	cameraCentre = cameraToPlayer ? player->GetPosition() : cameraPosition;
 
 	for (int i = 0; i < _dynamicBodies.size() - 1; i++)
 	{
