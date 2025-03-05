@@ -15,13 +15,14 @@ protected:
 	float _width;
 	float _height;
 
+	
+public:
+	bool grounded = true;
 	float maxStepHeight = 0.0f;
-	float maxStepFraction = 0.15f;
+	float maxStepFraction = 0.25f;
 
 	float edgeSlip = 0.0f;
 	float edgeSlipFraction = 0.05f;
-public:
-	bool grounded = true;
 
 	Player(Vec2 position, float width, float height, float mass, float elasticity);
 	Player(Vec2 position, float width, float height, float mass, float elasticity, Vec2 velocity);
