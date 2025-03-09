@@ -181,6 +181,7 @@
     <ClCompile Include="Maths.cpp" />
     <ClCompile Include="TextStream.cpp" />
     <ClCompile Include="Utilities.cpp" />
+    <ClCompile Include="Utility.cpp" />
     <ClCompile Include="Vec2.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +195,7 @@
     <ClInclude Include="..\imgui\imstb_rectpack.h" />
     <ClInclude Include="..\imgui\imstb_textedit.h" />
     <ClInclude Include="..\imgui\imstb_truetype.h" />
+    <ClInclude Include="AngleOrder.h" />
     <ClInclude Include="AppInfo.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="Box.h" />
@@ -223,6 +225,7 @@
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="TextStream.h" />
     <ClInclude Include="Utilities.h" />
+    <ClInclude Include="Utility.h" />
     <ClInclude Include="Vec2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

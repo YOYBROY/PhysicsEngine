@@ -26,8 +26,6 @@ public:
 
 	void Initialise() override;
 	void Update(float delta) override;
-
-	void CutPolygons(int polyToRemove, std::vector<Vec2> newPoly1, std::vector<Vec2> newPoly2);
-
 	void OnLeftClick() override;
+	void OnLeftRelease() override;
 };

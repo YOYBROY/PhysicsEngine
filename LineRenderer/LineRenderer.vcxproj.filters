@@ -93,6 +93,7 @@
       <Filter>Game\Applications</Filter>
     </ClCompile>
     <ClCompile Include="CuttingPolygons.cpp" />
+    <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GLFWCallbacks.h">
@@ -213,6 +214,10 @@
       <Filter>ThirdParty</Filter>
     </ClInclude>
     <ClInclude Include="CuttingPolygons.h" />
+    <ClInclude Include="Utility.h" />
+    <ClInclude Include="AngleOrder.h">
+      <Filter>Game\PhysicsEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

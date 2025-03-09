@@ -31,8 +31,8 @@ struct CameraControls
 struct AppInfo
 {
 	const char* appName = "Line Renderer";
-	unsigned int horizontalResolution = 1920;
-	unsigned int verticalResolution = 1080;
+	unsigned int horizontalResolution = 1280;
+	unsigned int verticalResolution = 720;
 	float lineWidth = 3.0f;
 	Colour backgroundColour = Colour::BLACK;
 	unsigned int fixedFramerate = 60;

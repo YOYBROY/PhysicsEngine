@@ -21,7 +21,7 @@ public:
 	void Draw(LineRenderer* lines) override;
 
 	std::vector<Vec2> GetVertices() { return _vertices; }
-	void SetVertices(std::vector<Vec2> newVerts) { _vertices = newVerts; }
+	void SetVertices(std::vector<Vec2> newVerts);
 	std::vector<Vec2> GetWorldSpaceVertices();
 	std::vector<Vec2> GetNormals() { return _normals; }
 	std::vector<Vec2> GetEdgeCentres() { return _edgeCentres; }
