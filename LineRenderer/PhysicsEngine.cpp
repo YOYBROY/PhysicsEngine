@@ -30,7 +30,9 @@ void PhysicsEngine::Initialise()
 {
 	PopulateCollisionFunctionArray();
 
-	_dynamicBodies.push_back(new Polygon(Vec2(1, 1), 4, 1, 1, 1, 50));
+	Polygon* newPlatform = new Polygon(Vec2(1, 1), 4, 1, 1, 1);
+	_dynamicBodies.push_back(newPlatform);
+
 	_staticBodies.push_back(new Polygon(Vec2(6, 2), 4, 1, 0, 1, 30));
 
 	_staticBodies.push_back(new Plane(Vec2(0, 1), -5));
@@ -79,6 +81,8 @@ void PhysicsEngine::Update(float delta)
 	}
 	cuttingPolygons.Draw(lines, cursorPos);
 }
+
+
 
 void PhysicsEngine::OnLeftClick()
 {

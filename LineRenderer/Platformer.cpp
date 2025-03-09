@@ -85,7 +85,7 @@ void Platformer::Initialise()
 				{
 					runningBoxType += (int)BoxType::D;
 				}
-
+				if (runningBoxType == 0) continue;
 				Box* newPlatform = new Box(Vec2(x + 0.5f, level.GetHeight() - y - 0.5f), 1.6f, 1, 0, 1);
 				newPlatform->SetBoxType(runningBoxType);
 				_staticBodies.push_back(newPlatform);
