@@ -92,8 +92,12 @@
     <ClCompile Include="PhysicsEngine.cpp">
       <Filter>Game\Applications</Filter>
     </ClCompile>
-    <ClCompile Include="CuttingPolygons.cpp" />
-    <ClCompile Include="Utility.cpp" />
+    <ClCompile Include="CuttingPolygons.cpp">
+      <Filter>Game\PhysicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>Game\PhysicsEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GLFWCallbacks.h">
@@ -213,9 +217,13 @@
     <ClInclude Include="stb_image.h">
       <Filter>ThirdParty</Filter>
     </ClInclude>
-    <ClInclude Include="CuttingPolygons.h" />
-    <ClInclude Include="Utility.h" />
     <ClInclude Include="AngleOrder.h">
+      <Filter>Game\PhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="CuttingPolygons.h">
+      <Filter>Game\PhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
       <Filter>Game\PhysicsEngine</Filter>
     </ClInclude>
   </ItemGroup>

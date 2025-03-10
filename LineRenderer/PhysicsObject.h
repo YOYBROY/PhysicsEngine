@@ -24,7 +24,11 @@ protected:
 	float _elasticity;
 	Colour _colour;
 	Vec2 _forceAccumulator;
-	Vec2 _gravity = Vec2(0,-5);
+	Vec2 _gravity = Vec2(0,-9.8);
+
+	float _orientation;
+	float _angularVelocity;
+	float _moment;
 
 public:
 	PhysicsObject();

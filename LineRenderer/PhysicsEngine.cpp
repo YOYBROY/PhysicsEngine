@@ -32,29 +32,15 @@ void PhysicsEngine::Initialise()
 {
 	PopulateCollisionFunctionArray();
 
-	Polygon* newPlatform = new Polygon(Vec2(1, 1), 10, 1, 1, 1);
+	Polygon* newPlatform = new Polygon(Vec2(1, 1), 5, 1, 1, 0.8f);
 	_dynamicBodies.push_back(newPlatform);
-
-	newPlatform = new Polygon(Vec2(0.8, 2), 10, 1, 1, 1);
-	_dynamicBodies.push_back(newPlatform);			  
-	newPlatform = new Polygon(Vec2(1.2, 4), 10, 1, 1, 1);
-	_dynamicBodies.push_back(newPlatform);			  
-	newPlatform = new Polygon(Vec2(1.4, 8), 10, 1, 1, 1);
-	_dynamicBodies.push_back(newPlatform);			  
-	//newPlatform = new Polygon(Vec2(0.8, 2), 10, 1, 1, 1);
-	//_dynamicBodies.push_back(newPlatform);			  
-	//newPlatform = new Polygon(Vec2(1.2, 4), 10, 1, 1, 1);
-	//_dynamicBodies.push_back(newPlatform);			  
-	//newPlatform = new Polygon(Vec2(1.4, 8), 10, 1, 1, 1);
-	//_dynamicBodies.push_back(newPlatform);			  
-	//newPlatform = new Polygon(Vec2(0.8, 2), 10, 1, 1, 1);
-	//_dynamicBodies.push_back(newPlatform);			  
-	//newPlatform = new Polygon(Vec2(1.2, 4), 10, 1, 1, 1);
-	//_dynamicBodies.push_back(newPlatform);			  
-	//newPlatform = new Polygon(Vec2(1.4, 8), 10, 1, 1, 1);
-	//_dynamicBodies.push_back(newPlatform);
-
-	//_staticBodies.push_back(new Polygon(Vec2(6, 2), 4, 1, 0, 1, 30));
+	
+	newPlatform = new Polygon(Vec2(0.8, 2), 7, 1, 1, 0.8f);
+	_dynamicBodies.push_back(newPlatform);
+	newPlatform = new Polygon(Vec2(1.2, 4), 4, 1, 1, 0.8f);
+	_dynamicBodies.push_back(newPlatform);
+	newPlatform = new Polygon(Vec2(1.4, 8), 3, 1, 1, 0.8f);
+	_dynamicBodies.push_back(newPlatform);
 
 	_staticBodies.push_back(new Plane(Vec2(0, 1), -5));
 	_staticBodies.push_back(new Plane(Vec2(1, 0), -8));
@@ -70,6 +56,7 @@ void PhysicsEngine::Update(float delta)
 
 	for (int i = 0; i < _dynamicBodies.size() - 1; i++)
 	{
+		if (_dynamicBodies.size() <= 0) break;
 		for (int j = i + 1; j < _dynamicBodies.size(); j++)
 		{
 			CollisionInfo collisionInfo = CheckCollision(_dynamicBodies[i], _dynamicBodies[j]);
@@ -83,6 +70,7 @@ void PhysicsEngine::Update(float delta)
 	
 	for (int i = 0; i < _staticBodies.size(); i++)
 	{
+		if (_staticBodies.size() <= 0) break;
 		for (int j = 0; j < _dynamicBodies.size(); j++)
 		{
 			CollisionInfo collisionInfo = CheckCollision(_staticBodies[i], _dynamicBodies[j]);

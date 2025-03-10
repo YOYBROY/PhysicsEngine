@@ -1,6 +1,25 @@
 #include "Polygon.h"
 #include <iostream>
 
+Polygon::Polygon(Vec2 position, std::vector<Vec2> verts, float mass, float elasticity) : PhysicsObject(position, mass, elasticity)
+{
+	_vertices = verts;
+	Vec2 next;
+	for (int i = 0; i < _vertices.size(); i++)
+	{
+		if (i == _vertices.size() - 1) { next = _vertices[0]; }
+		else { next = _vertices[i + 1]; }
+
+		_normals.push_back(Vec2(-(next.y - _vertices[i].y), next.x - _vertices[i].x).Normalise());
+		_edgeCentres.push_back((_vertices[i] + next) * 0.5f);
+	}
+}
+
+Polygon::Polygon(Vec2 position, std::vector<Vec2> verts, float mass, float elasticity, Vec2 velocity) : Polygon(position, verts, mass, elasticity)
+{
+	_velocity = velocity;
+}
+
 //Base
 Polygon::Polygon(Vec2 position, int vertCount, float padding, float mass, float elasticity) : PhysicsObject(position, mass, elasticity)
 {
@@ -68,7 +87,7 @@ void Polygon::Draw(LineRenderer* lines)
 		else { next = _vertices[i + 1]; }
 		lines->DrawLineSegment(_position + _vertices[i], _position + next, _colour);
 		//lines->DrawText(std::to_string(i), worldVerts[i], 0.1f);
-		//lines->DrawCross(_position, 0.05f);
+		lines->DrawCross(_position, 0.03f);
 
 		//Draw normals debug
 		//lines->DrawLineWithArrow((_position + _edgeCentres[i]), (_position + _edgeCentres[i] + _normals[i]));

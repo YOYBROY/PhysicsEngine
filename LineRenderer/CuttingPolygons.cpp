@@ -53,25 +53,25 @@ void CuttingPolygons::TryCut(Vec2 cursorPos, std::vector<PhysicsObject*>& bodies
 		}
 
 		//Check to see if poly is within line
-		//Vec2 newNormal = cursorPos - point1;
-		//
-		//float point1NormalProjection = Dot(point1, newNormal);
-		//float point2NormalProjection = Dot(cursorPos, newNormal);
-		//bool intersects = true;
-		//
-		//for (Vec2 vertex : cutPoints)
-		//{
-		//	float depth = Dot(vertex, newNormal);
-		//	if (depth - point1NormalProjection < 0)
-		//	{
-		//		intersects = false;
-		//	}
-		//	else if (depth - point2NormalProjection > 0)
-		//	{
-		//		intersects = false;
-		//	}
-		//}
-		//if (!intersects) break;
+		Vec2 inlineNormal = (cursorPos - point1).GetNormalised();
+		
+		float point1NormalProjection = Dot(point1, inlineNormal);
+		float point2NormalProjection = Dot(cursorPos, inlineNormal);
+		bool intersects = true;
+		
+		for (Vec2 vertex : cutPoints)
+		{
+			float depth = Dot(vertex, inlineNormal);
+			if (depth - point1NormalProjection < 0)
+			{
+				intersects = false;
+			}
+			else if (depth - point2NormalProjection > 0)
+			{
+				intersects = false;
+			}
+		}
+		if (!intersects) break;
 
 		std::vector<Vec2> poly1Verts;
 		std::vector<Vec2> poly2Verts;
@@ -112,11 +112,8 @@ void CuttingPolygons::TryCut(Vec2 cursorPos, std::vector<PhysicsObject*>& bodies
 		float mass = bodies[i]->GetMass() * 0.5f;
 
 		//Create an overload that creates arbitrary polygons
-		Polygon* newPoly1 = new Polygon(midPoint1, poly1Verts.size(), 0.5, mass, elasticity, velocity);
-		newPoly1->SetVertices(poly1Verts);
-
-		Polygon* newPoly2 = new Polygon(midPoint2, poly2Verts.size(), 0.5, mass, elasticity, velocity);
-		newPoly2->SetVertices(poly2Verts);
+		Polygon* newPoly1 = new Polygon(midPoint1, poly1Verts, mass, elasticity, velocity);
+		Polygon* newPoly2 = new Polygon(midPoint2, poly2Verts, mass, elasticity, velocity);
 
 		bodies.push_back(newPoly1);
 		bodies.push_back(newPoly2);
@@ -130,11 +127,11 @@ void CuttingPolygons::Draw(LineRenderer* lines, Vec2 cursorPos)
 {
 	if (cutting)
 	{
-		Vec2 midPoint = (point1 + cursorPos) * 0.5f;
-
-		Vec2 normal = (cursorPos - point1).GetNormalised().GetRotatedBy90();
-
 		lines->DrawLineSegment(point1, cursorPos);
-		lines->DrawLineWithArrow(midPoint, midPoint + normal);
+		
+		//Draw Normal direction line
+		//Vec2 midPoint = (point1 + cursorPos) * 0.5f;
+		//Vec2 normal = (cursorPos - point1).GetNormalised().GetRotatedBy90();
+		//lines->DrawLineWithArrow(midPoint, midPoint + normal);
 	}
 }

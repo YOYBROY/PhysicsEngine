@@ -24,6 +24,9 @@ void Example::Update(float delta)
 	//Everything that your program does every frame should go here.
 	//This includes rendering done with the line renderer!
 
+	float angle = RadToDeg(atan2(cursorPos.y, cursorPos.x));
+	lines->DrawLineWithArrow(Vec2(), cursorPos);
+
 	ImGui::Begin("Well Well Well");
 
 	ImGui::SliderFloat("DVD", &someTestValue, -1, 7);
@@ -32,8 +35,7 @@ void Example::Update(float delta)
 
 
 	TextStream output(lines, cursorPos, 0.5f, Colour::GREEN.Lighten());
-
-	output << "DVD " << someTestValue;
+	output << angle;
 }
 
 void Example::OnLeftClick()

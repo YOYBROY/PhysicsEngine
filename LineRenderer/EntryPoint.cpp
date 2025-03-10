@@ -16,7 +16,7 @@ int main()
 }
 
 //Ideas:
-//Slicing arbitrary polgyons
+//Slicing arbitrary polgyons -- Done
 //Rotation
 //Splines
 //Springs
