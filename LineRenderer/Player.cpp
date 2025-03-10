@@ -93,7 +93,7 @@ void Player::HandleInput(float delta)
 
 	if (!umbrella)
 	{
-		AddForce(Vec2(horizontalInput * MOVE_SPEED, 0));
+		AddForce(Vec2(horizontalInput * MOVE_SPEED, 0), Vec2());
 	}
 }
 

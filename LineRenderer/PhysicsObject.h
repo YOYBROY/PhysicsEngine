@@ -24,7 +24,7 @@ protected:
 	float _elasticity;
 	Colour _colour;
 	Vec2 _forceAccumulator;
-	Vec2 _gravity = Vec2(0,-9.8);
+	Vec2 _gravity = Vec2(0,0);
 
 	float _orientation;
 	float _angularVelocity;
@@ -49,6 +49,9 @@ public:
 	Vec2& GetVelocity() { return _velocity; }
 	void SetVelocity(Vec2 velocity) { _velocity = velocity; }
 
+	float& GetAngularVelocity() { return _angularVelocity; }
+	void SetAngularVelocity(float angularVelocity) { _angularVelocity -= angularVelocity; }
+
 	Vec2& GetAcceleration() { return _acceleration; }
 	void SetAcceleration(Vec2 acceleration) { _acceleration = acceleration; }
 
@@ -60,6 +63,6 @@ public:
 
 	virtual ObjectType GetObjectType() = 0;
 	
-	void AddForce(Vec2 force);
+	void AddForce(Vec2 force, Vec2 position);
 	void AddImpulse(Vec2 impulse);
 };

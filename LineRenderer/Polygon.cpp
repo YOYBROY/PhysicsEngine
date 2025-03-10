@@ -3,16 +3,7 @@
 
 Polygon::Polygon(Vec2 position, std::vector<Vec2> verts, float mass, float elasticity) : PhysicsObject(position, mass, elasticity)
 {
-	_vertices = verts;
-	Vec2 next;
-	for (int i = 0; i < _vertices.size(); i++)
-	{
-		if (i == _vertices.size() - 1) { next = _vertices[0]; }
-		else { next = _vertices[i + 1]; }
-
-		_normals.push_back(Vec2(-(next.y - _vertices[i].y), next.x - _vertices[i].x).Normalise());
-		_edgeCentres.push_back((_vertices[i] + next) * 0.5f);
-	}
+	_startingVerts = verts;
 }
 
 Polygon::Polygon(Vec2 position, std::vector<Vec2> verts, float mass, float elasticity, Vec2 velocity) : Polygon(position, verts, mass, elasticity)
@@ -26,39 +17,18 @@ Polygon::Polygon(Vec2 position, int vertCount, float padding, float mass, float 
 	Vec2 offsetVector(0, padding);
 	for (int i = 0; i < vertCount; i++)
 	{
-		_vertices.push_back(offsetVector);
+		_startingVerts.push_back(offsetVector);
 		offsetVector.RotateBy(-2 * PI / vertCount);
-	}
-
-	Vec2 next;
-	for (int i = 0; i < _vertices.size(); i++)
-	{
-		if (i == _vertices.size() - 1) { next = _vertices[0]; }
-		else { next = _vertices[i + 1]; }
-
-		_normals.push_back(Vec2(-(next.y - _vertices[i].y), next.x - _vertices[i].x).Normalise());
-		_edgeCentres.push_back((_vertices[i] + next) * 0.5f);
 	}
 }
 //Orientation
 Polygon::Polygon(Vec2 position, int vertCount, float padding, float mass, float elasticity, float orientation) : PhysicsObject(position, mass, elasticity)
 {
+	_orientation = orientation;
 	Vec2 offsetVector(0, padding);
-	offsetVector.RotateBy(DegToRad(orientation));
 	for (int i = 0; i < vertCount; i++)
 	{
-		_vertices.push_back(offsetVector);
-		offsetVector.RotateBy(-2 * PI / vertCount);
-	}
-
-	Vec2 next;
-	for (int i = 0; i < _vertices.size(); i++)
-	{
-		if (i == _vertices.size() - 1) { next = _vertices[0]; }
-		else { next = _vertices[i + 1]; }
-
-		_normals.push_back(Vec2(-(next.y - _vertices[i].y), next.x - _vertices[i].x).Normalise());
-		_edgeCentres.push_back((_vertices[i] + next) * 0.5f);
+		_startingVerts.push_back(offsetVector);
 	}
 }
 
@@ -77,27 +47,16 @@ Polygon::Polygon(Vec2 position, float mass, float elasticity) : PhysicsObject(po
 {
 }
 
-void Polygon::Draw(LineRenderer* lines)
+void Polygon::Update(float delta)
 {
-	std::vector<Vec2> worldVerts = GetWorldSpaceVertices();
-	Vec2 next;
-	for (int i = 0; i < _vertices.size(); i++)
+	_vertices = _startingVerts;
+	for (Vec2& vertex : _vertices)
 	{
-		if (i == _vertices.size() - 1) { next = _vertices[0]; }
-		else { next = _vertices[i + 1]; }
-		lines->DrawLineSegment(_position + _vertices[i], _position + next, _colour);
-		//lines->DrawText(std::to_string(i), worldVerts[i], 0.1f);
-		lines->DrawCross(_position, 0.03f);
-
-		//Draw normals debug
-		//lines->DrawLineWithArrow((_position + _edgeCentres[i]), (_position + _edgeCentres[i] + _normals[i]));
+		vertex.RotateBy(_orientation);
 	}
-	_colour = Colour::SHREKGREEN;
-}
 
-void Polygon::SetVertices(std::vector<Vec2> newVerts)
-{
-	_vertices = newVerts;
+	//recalculateNormals
+
 	_normals.clear();
 	_edgeCentres.clear();
 	Vec2 next;
@@ -105,10 +64,34 @@ void Polygon::SetVertices(std::vector<Vec2> newVerts)
 	{
 		if (i == _vertices.size() - 1) { next = _vertices[0]; }
 		else { next = _vertices[i + 1]; }
-	
+
 		_normals.push_back(Vec2(-(next.y - _vertices[i].y), next.x - _vertices[i].x).Normalise());
 		_edgeCentres.push_back((_vertices[i] + next) * 0.5f);
 	}
+	PhysicsObject::Update(delta);
+}
+
+void Polygon::Draw(LineRenderer* lines)
+{
+	Vec2 next;
+	for (int i = 0; i < _vertices.size(); i++)
+	{
+		if (i == _vertices.size() - 1) { next = _vertices[0]; }
+		else { next = _vertices[i + 1]; }
+
+		lines->DrawLineSegment(_position + _vertices[i], _position + next, _colour);
+		//lines->DrawText(std::to_string(i), worldVerts[i], 0.1f);
+		lines->DrawCross(_position, 0.03f);
+
+		//Draw normals debug
+		lines->DrawLineWithArrow((_position + _edgeCentres[i]), (_position + _edgeCentres[i] + _normals[i]));
+	}
+	_colour = Colour::SHREKGREEN;
+}
+
+void Polygon::SetVertices(std::vector<Vec2> newVerts)
+{
+	_startingVerts = newVerts;
 }
 
 std::vector<Vec2> Polygon::GetWorldSpaceVertices()

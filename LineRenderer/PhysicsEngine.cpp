@@ -13,7 +13,7 @@ PhysicsEngine::PhysicsEngine()
 {
 	//appInfo.fixedFramerate = 1;
 	appInfo.appName = "Physics Engine";
-	appInfo.grid.show = false;
+	//appInfo.grid.show = false;
 }
 
 PhysicsEngine::~PhysicsEngine()
@@ -32,14 +32,20 @@ void PhysicsEngine::Initialise()
 {
 	PopulateCollisionFunctionArray();
 
-	Polygon* newPlatform = new Polygon(Vec2(1, 1), 5, 1, 1, 0.8f);
+	Polygon* newPlatform = new Polygon(Vec2(1, 1), 4, 1, 1, 1);
+	newPlatform->SetAngularVelocity(2);
 	_dynamicBodies.push_back(newPlatform);
 	
-	newPlatform = new Polygon(Vec2(0.8, 2), 7, 1, 1, 0.8f);
+	newPlatform = new Polygon(Vec2(0.8, 2), 4, 3, 1, 1);
+	newPlatform->SetAngularVelocity(-1);
 	_dynamicBodies.push_back(newPlatform);
-	newPlatform = new Polygon(Vec2(1.2, 4), 4, 1, 1, 0.8f);
+
+	newPlatform = new Polygon(Vec2(1.2, 4), 3, 2, 1, 1);
+	newPlatform->SetAngularVelocity(-2);
 	_dynamicBodies.push_back(newPlatform);
-	newPlatform = new Polygon(Vec2(1.4, 8), 3, 1, 1, 0.8f);
+
+	newPlatform = new Polygon(Vec2(1.4, 8), 7, 1, 1, 1);
+	newPlatform->SetAngularVelocity(3);
 	_dynamicBodies.push_back(newPlatform);
 
 	_staticBodies.push_back(new Plane(Vec2(0, 1), -5));
@@ -95,10 +101,10 @@ void PhysicsEngine::Update(float delta)
 
 void PhysicsEngine::OnLeftClick()
 {
-	cuttingPolygons.TryCut(cursorPos, _dynamicBodies);
+	//cuttingPolygons.TryCut(cursorPos, _dynamicBodies);
 }
 
 void PhysicsEngine::OnLeftRelease()
 {
-	cuttingPolygons.TryCut(cursorPos, _dynamicBodies);
+	//cuttingPolygons.TryCut(cursorPos, _dynamicBodies);
 }

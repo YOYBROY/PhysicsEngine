@@ -18,6 +18,8 @@ void PhysicsObject::Update(float delta)
 	_position += _velocity * delta;
 
 	_forceAccumulator = Vec2(0,0);
+
+	_orientation += _angularVelocity * delta;
 }
 
 void PhysicsObject::Draw(LineRenderer* lines)
@@ -33,9 +35,11 @@ float PhysicsObject::GetInverseMass()
 	return 1 / _mass;
 }
 
-void PhysicsObject::AddForce(Vec2 force)
+void PhysicsObject::AddForce(Vec2 force, Vec2 position)
 {
 	_forceAccumulator += force;
+
+	_angularVelocity += (force.y * position.x - force.x * position.y) / GetMass();
 }
 
 void PhysicsObject::AddImpulse(Vec2 impulse)

@@ -141,7 +141,7 @@ void Platformer::Update(float delta)
 
 		if (Dot(player->GetVelocity().GetNormalised(), Vec2(0, 1)) < 0.5f)
 		{
-			player->AddForce(velocityAgainstUmbrella * -8);
+			player->AddForce(velocityAgainstUmbrella * -8, Vec2());
 		}
 
 		lines->DrawLineSegment(player->GetPosition() + Vec2(0,1) + (umbrellaDirection.GetRotatedBy90() * 0.5f), player->GetPosition() + Vec2(0, 1) - (umbrellaDirection.GetRotatedBy90() * 0.5f));
